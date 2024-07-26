@@ -1,9 +1,11 @@
 'use client';
-import { useBreakPoint } from '@/hooks';
-import { Box } from '@mui/material';
+import { useBreakPoint, useCharacter } from '@/hooks';
+import { Box, List } from '@mui/material';
+import { LeftBarListItem } from '../atom';
 
 export const LeftBar = () => {
 	const breakpoint = useBreakPoint();
+	const { characters } = useCharacter();
 
 	return (
 		<>
@@ -11,19 +13,29 @@ export const LeftBar = () => {
 				position="fixed"
 				top="60px"
 				left={0}
-				display="flex"
-				justifyContent="center"
-				alignItems="center"
-				width={['xs'].includes(breakpoint) ? '100%' : '300px'}
-				height="100%"
-				bgcolor="#222"
-				sx={{
-					opacity: 0.7,
-				}}
-			></Box>
+				width={['xs'].includes(breakpoint) ? '100%' : '400px'}
+				height="calc(100% - 60px)"
+			>
+				<List
+					sx={{
+						width: '100%',
+						height: '100%',
+						padding: '10px',
+						overflowY: 'overlay',
+					}}
+				>
+					{characters?.map((character, index) => (
+						<LeftBarListItem
+							key={character.speaker_uuid}
+							index={index}
+							uuid={character.speaker_uuid}
+						/>
+					))}
+				</List>
+			</Box>
 
 			<Box
-				width={['xs'].includes(breakpoint) ? '0px' : '300px'}
+				width={['xs'].includes(breakpoint) ? '0px' : '400px'}
 				height="100%"
 			/>
 		</>
