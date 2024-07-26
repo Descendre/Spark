@@ -6,6 +6,7 @@ export const darkTheme = createTheme({
 		mode: 'dark',
 		layout: {
 			primary: '#000000',
+			line: '#333333',
 		},
 		background: {
 			default: '#0d1318',
