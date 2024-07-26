@@ -10,16 +10,10 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 	return (
 		<>
 			<MainHeader />
-			<Box
-				display="flex"
-				justifyContent="center"
-				alignItems="center"
-				width="100%"
-				height="calc(100vh - 60px)"
-			>
+			<Box display="flex" width="100%" height="calc(100% - 60px)">
 				<LeftBar />
 				<Box
-					width={['xs'].includes(breakpoint) ? '100%' : 'calc(100% - 300px)'}
+					width={['xs'].includes(breakpoint) ? '100%' : 'calc(100% - 400px)'}
 					height="100%"
 				>
 					{children}
