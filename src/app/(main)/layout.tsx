@@ -3,6 +3,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { darkTheme } from '@/themes';
 import { MainLayout } from '@/layouts';
+import { ContextProvider } from '@/provider/ContextProvider';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -18,10 +19,12 @@ export default function RootLayout({
 		<html lang="en">
 			<ThemeProvider theme={darkTheme}>
 				<body>
-					<CssBaseline />
-					<AppRouterCacheProvider>
-						<MainLayout>{children}</MainLayout>
-					</AppRouterCacheProvider>
+					<ContextProvider>
+						<CssBaseline />
+						<AppRouterCacheProvider>
+							<MainLayout>{children}</MainLayout>
+						</AppRouterCacheProvider>
+					</ContextProvider>
 				</body>
 			</ThemeProvider>
 		</html>
