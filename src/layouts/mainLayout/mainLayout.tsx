@@ -1,8 +1,12 @@
+'use client';
 import { MainLayoutProps } from '@/interfaces';
 import { LeftBar, MainHeader } from './block';
 import { Box } from '@mui/material';
+import { useBreakPoint } from '@/hooks';
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
+	const breakpoint = useBreakPoint();
+
 	return (
 		<>
 			<MainHeader />
@@ -12,10 +16,12 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 				alignItems="center"
 				width="100%"
 				height="calc(100vh - 60px)"
-				bgcolor="#add"
 			>
 				<LeftBar />
-				<Box width="calc(100% - 250px)" height="100%">
+				<Box
+					width={['xs'].includes(breakpoint) ? '100%' : 'calc(100% - 300px)'}
+					height="100%"
+				>
 					{children}
 				</Box>
 			</Box>
