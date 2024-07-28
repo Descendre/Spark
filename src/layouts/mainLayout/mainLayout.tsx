@@ -24,6 +24,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 				<Box display="flex" width="100%" height="calc(100% - 60px)">
 					<LeftBar />
 					<Box
+						zIndex={50}
 						width={['xs'].includes(breakpoint) ? '100%' : 'calc(100% - 400px)'}
 						height="100%"
 						sx={{
