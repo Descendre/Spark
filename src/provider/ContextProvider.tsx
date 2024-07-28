@@ -1,6 +1,7 @@
 'use client';
 import {
 	ContextProviderProps,
+	SelectedContentProps,
 	VoicevoxCharacterDetailResponse,
 	VoicevoxSpeakersResponse,
 } from '@/interfaces';
@@ -15,6 +16,8 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 	const [characterDetails, setCharacterDetails] = useState<{
 		[uuid: string]: VoicevoxCharacterDetailResponse;
 	}>({});
+	const [selectedContent, setSelectedContent] =
+		useState<SelectedContentProps>('noSelected');
 	const [selectedCharacterUuid, setSelectedCharacterUuid] = useState<
 		string | null
 	>(null);
@@ -24,6 +27,8 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 		setCharacters,
 		characterDetails,
 		setCharacterDetails,
+		selectedContent,
+		setSelectedContent,
 		selectedCharacterUuid,
 		setSelectedCharacterUuid,
 	};

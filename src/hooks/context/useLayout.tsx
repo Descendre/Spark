@@ -9,19 +9,29 @@ export const useLayout = (): UseLayoutProps => {
 		throw new Error('Context is not provided');
 	}
 
-	const { selectedCharacterUuid, setSelectedCharacterUuid } = context;
+	const {
+		selectedContent,
+		setSelectedContent,
+		selectedCharacterUuid,
+		setSelectedCharacterUuid,
+	} = context;
 
 	const handleCharacterSelect = ({
 		uuid,
 	}: HandleCharacterSelectProps): void => {
 		if (selectedCharacterUuid === uuid) {
 			setSelectedCharacterUuid(null);
+			setSelectedContent('noSelected');
 		} else {
 			setSelectedCharacterUuid(uuid);
+			setSelectedContent('character');
 		}
 	};
+	console.log(selectedContent);
 
 	return {
+		selectedContent,
+		setSelectedContent,
 		selectedCharacterUuid,
 		setSelectedCharacterUuid,
 		handleCharacterSelect,
