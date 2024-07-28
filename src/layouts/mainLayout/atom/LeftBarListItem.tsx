@@ -1,5 +1,5 @@
 'use client';
-import { useCharacter } from '@/hooks';
+import { useCharacter, useDominantColors } from '@/hooks';
 import { LeftBarListItemProps } from '@/interfaces';
 import {
 	Avatar,
