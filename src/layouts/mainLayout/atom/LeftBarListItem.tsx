@@ -1,5 +1,10 @@
 'use client';
-import { useCharacter, useDominantColors, useLayout } from '@/hooks';
+import {
+	useCharacter,
+	useDominantColors,
+	useLayout,
+	usePalette,
+} from '@/hooks';
 import { LeftBarListItemProps } from '@/interfaces';
 import {
 	Avatar,
@@ -11,6 +16,7 @@ import {
 export const LeftBarListItem = ({ index, uuid }: LeftBarListItemProps) => {
 	const { characters, characterDetails } = useCharacter();
 	const { selectedCharacterUuid, handleCharacterSelect } = useLayout();
+	const palette = usePalette();
 	const isSelected: boolean = selectedCharacterUuid === uuid;
 
 	return (
@@ -20,9 +26,13 @@ export const LeftBarListItem = ({ index, uuid }: LeftBarListItemProps) => {
 					cursor: 'pointer',
 					height: '80px',
 					borderRadius: '10px',
-					backgroundColor: isSelected ? '#add' : 'transparent',
+					background: isSelected
+						? `linear-gradient(to right, rgba(${palette.layout.selectedCharacterBg.primary}), rgba(${palette.layout.selectedCharacterBg.secondary}))`
+						: 'transparent',
 					'&:hover': {
-						backgroundColor: isSelected ? '#add' : 'transparent',
+						background: isSelected
+							? `linear-gradient(to right, rgba(${palette.layout.selectedCharacterBg.primary}), rgba(${palette.layout.selectedCharacterBg.secondary}))`
+							: `linear-gradient(to right, rgba(${palette.layout.hoverCharacterBg.primary}), rgba(${palette.layout.hoverCharacterBg.secondary}))`,
 					},
 					'.MuiTouchRipple-child': {
 						color: 'transparent',

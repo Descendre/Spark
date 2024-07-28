@@ -1,4 +1,5 @@
 'use client';
+import { hexToRgba } from '@/utils';
 import { createTheme } from '@mui/material';
 
 export const darkTheme = createTheme({
@@ -7,6 +8,14 @@ export const darkTheme = createTheme({
 		layout: {
 			primary: '#000000',
 			line: '#333333',
+			selectedCharacterBg: {
+				primary: `${hexToRgba('#79197C')}, 0.5`,
+				secondary: `${hexToRgba('#00E5FF')}, 0.5`,
+			},
+			hoverCharacterBg: {
+				primary: `${hexToRgba('#79197C')}, 0.2`,
+				secondary: `${hexToRgba('#00E5FF')}, 0.2`,
+			},
 		},
 		background: {
 			default: '#0d1318',
@@ -20,7 +29,7 @@ export const darkTheme = createTheme({
 				max-width: 2vw;
             },
             ::-webkit-scrollbar-thumb {
-                background-color: #233240;
+                background-color: #79197C;
 				border-radius: 5px;
             },
             ::-webkit-scrollbar-track {
