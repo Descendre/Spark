@@ -22,6 +22,11 @@ export const LeftBar = () => {
 						height: '100%',
 						padding: '10px',
 						overflowY: 'overlay',
+						'&:not(:hover)': {
+							'&::-webkit-scrollbar-thumb': {
+								backgroundColor: 'transparent',
+							},
+						},
 					}}
 				>
 					{characters?.map((character, index) => (
