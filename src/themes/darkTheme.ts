@@ -11,7 +11,10 @@ export const darkTheme = createTheme({
 		},
 		layout: {
 			primary: '#000000',
-			line: '#333333',
+			line: {
+				main: '#333333',
+				sub: '#283848',
+			},
 			selectedCharacterBg: {
 				primary: `${hexToRgba('#79197C')}, 0.5`,
 				secondary: `${hexToRgba('#00E5FF')}, 0.5`,
@@ -19,6 +22,11 @@ export const darkTheme = createTheme({
 			hoverCharacterBg: {
 				primary: `${hexToRgba('#79197C')}, 0.2`,
 				secondary: `${hexToRgba('#00E5FF')}, 0.2`,
+			},
+		},
+		component: {
+			footer: {
+				inputBar: '#161f28',
 			},
 		},
 		background: {

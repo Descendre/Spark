@@ -4,7 +4,10 @@ declare module '@mui/material/styles' {
 	interface Palette {
 		layout: {
 			primary: string;
-			line: string;
+			line: {
+				main: string;
+				sub: string;
+			};
 			selectedCharacterBg: {
 				primary: string;
 				secondary: string;
@@ -14,11 +17,19 @@ declare module '@mui/material/styles' {
 				secondary: string;
 			};
 		};
+		component: {
+			footer: {
+				inputBar: string;
+			};
+		};
 	}
 	interface PaletteOptions {
 		layout: {
 			primary: string;
-			line: string;
+			line: {
+				main: string;
+				sub: string;
+			};
 			selectedCharacterBg: {
 				primary: string;
 				secondary: string;
@@ -26,6 +37,11 @@ declare module '@mui/material/styles' {
 			hoverCharacterBg: {
 				primary: string;
 				secondary: string;
+			};
+		};
+		component: {
+			footer: {
+				inputBar: string;
 			};
 		};
 	}
