@@ -12,6 +12,12 @@ export interface ContextProviderProps {
 	setCharacterDetails: React.Dispatch<
 		React.SetStateAction<{ [uuid: string]: VoicevoxCharacterDetailResponse }>
 	>;
+	selectedContent: SelectedContentProps;
+	setSelectedContent: React.Dispatch<
+		React.SetStateAction<SelectedContentProps>
+	>;
 	selectedCharacterUuid: string | null;
 	setSelectedCharacterUuid: React.Dispatch<React.SetStateAction<string | null>>;
 }
+
+export type SelectedContentProps = 'noSelected' | 'character';
