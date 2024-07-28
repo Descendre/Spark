@@ -1,10 +1,11 @@
 'use client';
-import { useBreakPoint, useCharacter } from '@/hooks';
+import { useBreakPoint, useCharacter, usePalette } from '@/hooks';
 import { Box, List } from '@mui/material';
 import { LeftBarListItem } from '../atom';
 
 export const LeftBar = () => {
 	const breakpoint = useBreakPoint();
+	const palette = usePalette();
 	const { characters } = useCharacter();
 
 	return (
@@ -15,6 +16,7 @@ export const LeftBar = () => {
 				left={0}
 				width={['xs'].includes(breakpoint) ? '100%' : '400px'}
 				height="calc(100% - 60px)"
+				bgcolor={palette.background.default}
 			>
 				<List
 					sx={{
