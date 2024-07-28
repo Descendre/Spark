@@ -15,12 +15,17 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 	const [characterDetails, setCharacterDetails] = useState<{
 		[uuid: string]: VoicevoxCharacterDetailResponse;
 	}>({});
+	const [selectedCharacterUuid, setSelectedCharacterUuid] = useState<
+		string | null
+	>(null);
 
 	const contextValue = {
 		characters,
 		setCharacters,
 		characterDetails,
 		setCharacterDetails,
+		selectedCharacterUuid,
+		setSelectedCharacterUuid,
 	};
 
 	return <Context.Provider value={contextValue}>{children}</Context.Provider>;

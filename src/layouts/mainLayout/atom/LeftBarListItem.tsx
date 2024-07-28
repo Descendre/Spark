@@ -1,5 +1,5 @@
 'use client';
-import { useCharacter, useDominantColors } from '@/hooks';
+import { useCharacter, useDominantColors, useLayout } from '@/hooks';
 import { LeftBarListItemProps } from '@/interfaces';
 import {
 	Avatar,
@@ -10,6 +10,8 @@ import {
 
 export const LeftBarListItem = ({ index, uuid }: LeftBarListItemProps) => {
 	const { characters, characterDetails } = useCharacter();
+	const { selectedCharacterUuid, handleCharacterSelect } = useLayout();
+	const isSelected: boolean = selectedCharacterUuid === uuid;
 
 	return (
 		<>
@@ -18,7 +20,15 @@ export const LeftBarListItem = ({ index, uuid }: LeftBarListItemProps) => {
 					cursor: 'pointer',
 					height: '80px',
 					borderRadius: '10px',
+					backgroundColor: isSelected ? '#add' : 'transparent',
+					'&:hover': {
+						backgroundColor: isSelected ? '#add' : 'transparent',
+					},
+					'.MuiTouchRipple-child': {
+						color: 'transparent',
+					},
 				}}
+				onClick={() => handleCharacterSelect({ uuid: uuid })}
 			>
 				<ListItemAvatar>
 					<Avatar src={characterDetails[uuid]?.style_infos[0].icon} />
