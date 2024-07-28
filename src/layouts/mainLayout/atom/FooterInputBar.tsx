@@ -1,7 +1,7 @@
 'use client';
 import { usePalette } from '@/hooks';
 import { Send } from '@mui/icons-material';
-import { Box, InputAdornment, InputBase, TextField } from '@mui/material';
+import { InputAdornment, TextField } from '@mui/material';
 
 export const FooterInputBar = () => {
 	const palette = usePalette();
@@ -9,6 +9,7 @@ export const FooterInputBar = () => {
 	return (
 		<>
 			<TextField
+				size="small"
 				multiline
 				maxRows={6}
 				placeholder="AIキャラクターにメッセージを送信する"
@@ -18,7 +19,7 @@ export const FooterInputBar = () => {
 						backgroundColor: palette.component.footer.inputBar,
 						borderRadius: '30px',
 						'& .MuiInputBase-input': {
-							padding: '0 30px',
+							padding: '4px 30px',
 							'::placeholder': {
 								color: palette.text.disabled,
 							},

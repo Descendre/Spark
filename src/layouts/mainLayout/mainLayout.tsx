@@ -26,7 +26,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 					<Box
 						zIndex={50}
 						width={
-							['xs', 'sm'].includes(breakpoint) ? '100%' : 'calc(100% - 400px)'
+							['xs', 'sm'].includes(breakpoint) ? '100%' : 'calc(100% - 350px)'
 						}
 						height="calc(100% - 100px)"
 						sx={{
