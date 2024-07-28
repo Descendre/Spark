@@ -1,6 +1,6 @@
 'use client';
 import { MainLayoutProps } from '@/interfaces';
-import { LeftBar, MainHeader } from './block';
+import { Footer, LeftBar, MainHeader } from './block';
 import { Box } from '@mui/material';
 import { useBreakPoint } from '@/hooks';
 
@@ -28,7 +28,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 						width={
 							['xs', 'sm'].includes(breakpoint) ? '100%' : 'calc(100% - 400px)'
 						}
-						height="100%"
+						height="calc(100% - 100px)"
 						sx={{
 							overflowY: 'overlay',
 							'&:not(:hover)': {
@@ -39,6 +39,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 						}}
 					>
 						{children}
+						<Footer />
 					</Box>
 				</Box>
 			</Box>
