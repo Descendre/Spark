@@ -10,7 +10,6 @@ export const useDominantColors = (imageUrl: string): UseDominantColorProps => {
 
 	useEffect(() => {
 		const getColors = async () => {
-			console.log(imageUrl);
 			if (!imageUrl) {
 				setDominantColor('transparent');
 				setDominantRgbaColor('transparent');

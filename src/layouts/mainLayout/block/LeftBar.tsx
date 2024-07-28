@@ -15,7 +15,7 @@ export const LeftBar = () => {
 				position="fixed"
 				top="60px"
 				left={0}
-				width={['xs'].includes(breakpoint) ? '100%' : '400px'}
+				width={['xs', 'sm'].includes(breakpoint) ? '100%' : '400px'}
 				height="calc(100% - 60px)"
 				bgcolor={palette.background.default}
 			>

@@ -1,10 +1,14 @@
 'use client';
 import { hexToRgba } from '@/utils';
 import { createTheme } from '@mui/material';
+import { blue } from '@mui/material/colors';
 
 export const darkTheme = createTheme({
 	palette: {
 		mode: 'dark',
+		primary: {
+			main: blue[400],
+		},
 		layout: {
 			primary: '#000000',
 			line: '#333333',
@@ -29,7 +33,7 @@ export const darkTheme = createTheme({
 				max-width: 2vw;
             },
             ::-webkit-scrollbar-thumb {
-                background-color: #79197C;
+                background: rgba(255, 255, 255, 0.3);
 				border-radius: 5px;
             },
             ::-webkit-scrollbar-track {

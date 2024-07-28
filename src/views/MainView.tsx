@@ -11,7 +11,6 @@ export const MainView = () => {
 	return (
 		<Box
 			width="100%"
-			maxWidth="1000px"
 			margin="0 auto"
 			height="100%"
 			bgcolor={palette.background.default}

@@ -25,7 +25,9 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 					<LeftBar />
 					<Box
 						zIndex={50}
-						width={['xs'].includes(breakpoint) ? '100%' : 'calc(100% - 400px)'}
+						width={
+							['xs', 'sm'].includes(breakpoint) ? '100%' : 'calc(100% - 400px)'
+						}
 						height="100%"
 						sx={{
 							overflowY: 'overlay',
