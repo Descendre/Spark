@@ -11,6 +11,7 @@ export const LeftBar = () => {
 	return (
 		<>
 			<Box
+				zIndex={100}
 				position="fixed"
 				top="60px"
 				left={0}
