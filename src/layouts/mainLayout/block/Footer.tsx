@@ -13,7 +13,7 @@ export const Footer = () => {
 			display="flex"
 			justifyContent="center"
 			alignItems="center"
-			width={['xs', 'sm'].includes(breakpoint) ? '100%' : 'calc(100% - 400px)'}
+			width={['xs', 'sm'].includes(breakpoint) ? '100%' : 'calc(100% - 350px)'}
 			height="100px"
 		>
 			<Box

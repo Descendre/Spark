@@ -24,7 +24,7 @@ export const LeftBarListItem = ({ index, uuid }: LeftBarListItemProps) => {
 			<ListItemButton
 				sx={{
 					cursor: 'pointer',
-					height: '80px',
+					height: '70px',
 					borderRadius: '10px',
 					background: isSelected
 						? `linear-gradient(to right, rgba(${palette.layout.selectedCharacterBg.primary}), rgba(${palette.layout.selectedCharacterBg.secondary}))`
