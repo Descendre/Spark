@@ -1,5 +1,6 @@
 'use client';
 import { useCharacter } from '@/hooks';
+import { MainView } from '@/views';
 import { useEffect } from 'react';
 
 export default function Home() {
@@ -9,5 +10,9 @@ export default function Home() {
 		handleGetCharacters();
 	}, []);
 
-	return <>aaaaa</>;
+	return (
+		<>
+			<MainView />
+		</>
+	);
 }

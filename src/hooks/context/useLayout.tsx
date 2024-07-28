@@ -27,7 +27,6 @@ export const useLayout = (): UseLayoutProps => {
 			setSelectedContent('character');
 		}
 	};
-	console.log(selectedContent);
 
 	return {
 		selectedContent,
