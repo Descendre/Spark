@@ -53,9 +53,12 @@ export const MainFooterInputBar = () => {
 							<Tooltip title="送信" placement="top">
 								<Send
 									sx={{
-										color: disabled
-											? palette.text.disabled
-											: palette.text.primary,
+										color:
+											!selectedCharacterUuid ||
+											disabled ||
+											text[selectedCharacterUuid].length === 0
+												? palette.text.disabled
+												: palette.text.primary,
 										cursor: 'pointer',
 									}}
 									onClick={handeSendText}
