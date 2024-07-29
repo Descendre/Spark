@@ -4,9 +4,21 @@ declare module '@mui/material/styles' {
 	interface Palette {
 		layout: {
 			mainLayout: {
-				header: string;
-				leftBar: string;
-				leftDrawer: string;
+				header: {
+					bg: string;
+					callStart: string;
+					callEnd: string;
+					disabled: string;
+				};
+				leftBar: {
+					bg: string;
+				};
+				leftDrawer: {
+					bg: string;
+				};
+				footer: {
+					inputBar: string;
+				};
 				line: {
 					main: string;
 					sub: string;
@@ -19,20 +31,27 @@ declare module '@mui/material/styles' {
 					primary: string;
 					secondary: string;
 				};
-			};
-		};
-		component: {
-			footer: {
-				inputBar: string;
 			};
 		};
 	}
 	interface PaletteOptions {
 		layout: {
 			mainLayout: {
-				header: string;
-				leftBar: string;
-				leftDrawer: string;
+				header: {
+					bg: string;
+					callStart: string;
+					callEnd: string;
+					disabled: string;
+				};
+				leftBar: {
+					bg: string;
+				};
+				leftDrawer: {
+					bg: string;
+				};
+				footer: {
+					inputBar: string;
+				};
 				line: {
 					main: string;
 					sub: string;
@@ -45,11 +64,6 @@ declare module '@mui/material/styles' {
 					primary: string;
 					secondary: string;
 				};
-			};
-		};
-		component: {
-			footer: {
-				inputBar: string;
 			};
 		};
 	}

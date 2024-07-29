@@ -6,6 +6,7 @@ import {
 	ListItemAvatar,
 	ListItemButton,
 	ListItemText,
+	Skeleton,
 } from '@mui/material';
 
 export const MainLeftBarListItem = ({ index, uuid }: LeftBarListItemProps) => {
@@ -38,7 +39,11 @@ export const MainLeftBarListItem = ({ index, uuid }: LeftBarListItemProps) => {
 				}}
 			>
 				<ListItemAvatar>
-					<Avatar src={characterDetails[uuid]?.style_infos[0].icon} />
+					{characterDetails[uuid] ? (
+						<Avatar src={characterDetails[uuid].style_infos[0].icon} />
+					) : (
+						<Skeleton variant="circular" width={30} height={30} />
+					)}
 				</ListItemAvatar>
 				<ListItemText
 					primary={

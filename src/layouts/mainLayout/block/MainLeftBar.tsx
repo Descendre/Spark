@@ -27,7 +27,7 @@ export const MainLeftBar = () => {
 				<Box
 					width="100%"
 					height="100%"
-					bgcolor={palette.layout.mainLayout.leftBar}
+					bgcolor={palette.layout.mainLayout.leftBar.bg}
 				>
 					<MainLeftBarSelection />
 					<List

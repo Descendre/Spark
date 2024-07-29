@@ -1,7 +1,11 @@
 'use client';
 import { useBreakPoint, useLayout, usePalette } from '@/hooks';
 import { Box, Tooltip } from '@mui/material';
-import { MainHeaderCommands, MainHeaderLogo } from '../atom';
+import {
+	MainHeaderCommandsLeft,
+	MainHeaderCommandsRight,
+	MainHeaderLogo,
+} from '../atom';
 import { MenuOpen } from '@mui/icons-material';
 
 export const MainHeader = () => {
@@ -24,7 +28,7 @@ export const MainHeader = () => {
 				width={isLeftBarOpen ? 'calc(100% - 350px)' : '100%'}
 				height="60px"
 				padding="0 20px"
-				bgcolor={palette.layout.mainLayout.header}
+				bgcolor={palette.layout.mainLayout.header.bg}
 			>
 				{['xs', 'sm'].includes(breakpoint) ? (
 					<>
@@ -59,18 +63,23 @@ export const MainHeader = () => {
 							alignItems="center"
 							width="50px"
 							height="100%"
-						></Box>
+						>
+							<MainHeaderCommandsRight />
+						</Box>
 					</>
 				) : (
-					<Box
-						display="flex"
-						justifyContent="center"
-						alignItems="center"
-						gap="15px"
-					>
-						{!isLeftBar && <MainHeaderCommands />}
-						<MainHeaderLogo />
-					</Box>
+					<>
+						<Box
+							display="flex"
+							justifyContent="center"
+							alignItems="center"
+							gap="15px"
+						>
+							{!isLeftBar && <MainHeaderCommandsLeft />}
+							<MainHeaderLogo />
+						</Box>
+						<MainHeaderCommandsRight />
+					</>
 				)}
 			</Box>
 
