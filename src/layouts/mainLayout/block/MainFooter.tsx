@@ -3,23 +3,21 @@ import { Box } from '@mui/material';
 import { FooterInputBar } from '../atom';
 import { useBreakPoint, useLayout } from '@/hooks';
 
-export const Footer = () => {
+export const MainFooter = () => {
 	const { isLeftBar } = useLayout();
 	const breakpoint = useBreakPoint();
+	const isLeftBarOpen: boolean =
+		!['xs', 'sm'].includes(breakpoint) && isLeftBar;
 
 	return (
 		<Box
 			position="fixed"
 			bottom={0}
-			left={['xs', 'sm'].includes(breakpoint) || !isLeftBar ? 0 : '350px'}
+			left={isLeftBarOpen ? '350px' : 0}
 			display="flex"
 			justifyContent="center"
 			alignItems="center"
-			width={
-				['xs', 'sm'].includes(breakpoint) || !isLeftBar
-					? '100%'
-					: 'calc(100% - 350px)'
-			}
+			width={isLeftBarOpen ? 'calc(100% - 350px)' : '100%'}
 			height="100px"
 		>
 			<Box
