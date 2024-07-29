@@ -1,9 +1,11 @@
 'use client';
+import { POST } from '@/app/api/voicevox/audioQuery/route';
 import {
 	HandleKeyDownProps,
 	HandleSetTextProps,
 	UseTextProps,
 } from '@/interfaces';
+import { axiosFetch } from '@/libs';
 import { Context } from '@/provider';
 import { useContext } from 'react';
 
@@ -13,7 +15,7 @@ export const useText = (): UseTextProps => {
 		throw new Error('Context is not provided');
 	}
 
-	const { selectedCharacterUuid, text, setText } = context;
+	const { selectedCharacterUuid, text, setText, style } = context;
 
 	const handleSetText = ({ event }: HandleSetTextProps): void => {
 		if (!selectedCharacterUuid) return;
@@ -30,10 +32,14 @@ export const useText = (): UseTextProps => {
 		}
 	};
 
-	const handeSendText = (): void => {
+	const handeSendText = async (): Promise<void> => {
 		if (!selectedCharacterUuid || text[selectedCharacterUuid].length === 0)
 			return;
-		console.log('送信');
+		const response = await axiosFetch.post('/api/voicevox/audioQuery', {
+			text: text[selectedCharacterUuid],
+			speaker: style[selectedCharacterUuid].id,
+		});
+		console.log(response);
 		setText((prevText) => ({
 			...prevText,
 			[selectedCharacterUuid]: '',
