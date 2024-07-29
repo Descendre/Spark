@@ -1,6 +1,6 @@
 'use client';
 import { useLayout } from '@/hooks';
-import { MenuOpen } from '@mui/icons-material';
+import { MenuOpen, Restore } from '@mui/icons-material';
 import { Box, Tooltip } from '@mui/material';
 
 export const MainLeftDrawerSelection = () => {
@@ -22,6 +22,13 @@ export const MainLeftDrawerSelection = () => {
 						cursor: 'pointer',
 					}}
 					onClick={() => setIsLeftDrawer(false)}
+				/>
+			</Tooltip>
+			<Tooltip title="チャットログ" placement="bottom">
+				<Restore
+					sx={{
+						cursor: 'pointer',
+					}}
 				/>
 			</Tooltip>
 		</Box>

@@ -1,6 +1,6 @@
 'use client';
 import { useLayout } from '@/hooks';
-import { FormatListBulleted } from '@mui/icons-material';
+import { FormatListBulleted, Restore } from '@mui/icons-material';
 import { Box, Tooltip } from '@mui/material';
 
 export const MainLeftBarSelection = () => {
@@ -22,6 +22,13 @@ export const MainLeftBarSelection = () => {
 						cursor: 'pointer',
 					}}
 					onClick={() => setIsLeftBar(false)}
+				/>
+			</Tooltip>
+			<Tooltip title="チャットログ" placement="bottom">
+				<Restore
+					sx={{
+						cursor: 'pointer',
+					}}
 				/>
 			</Tooltip>
 		</Box>
