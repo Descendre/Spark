@@ -7,7 +7,8 @@ import React from 'react';
 export const NoSelectedHeader = () => {
 	const palette = usePalette();
 	const breakpoint = useBreakPoint();
-	const { isLeftBar, setIsLeftBar } = useLayout();
+	const { isLeftBar, setIsLeftBar, isLeftDrawer, setIsLeftDrawer } =
+		useLayout();
 
 	return (
 		<Box
@@ -16,14 +17,20 @@ export const NoSelectedHeader = () => {
 			justifyContent="center"
 			alignItems="center"
 			gap="20px"
-			width={['xs'].includes(breakpoint) ? '70%' : '50%'}
+			width={['xs', 'sm'].includes(breakpoint) ? '70%' : '50%'}
 			onClick={() => {
-				if (!isLeftBar) {
-					setIsLeftBar(true);
+				if (['xs', 'sm'].includes(breakpoint)) {
+					if (!isLeftDrawer) {
+						setIsLeftDrawer(true);
+					}
+				} else {
+					if (!isLeftBar) {
+						setIsLeftBar(true);
+					}
 				}
 			}}
 			sx={{
-				cursor: isLeftBar ? 'auto' : 'pointer',
+				cursor: 'pointer',
 			}}
 		>
 			<Typography
