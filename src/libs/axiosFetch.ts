@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 export const axiosFetch = {
 	post: async <T>(
 		url: string,
-		body: any,
+		body?: any,
 		header?: { [key: string]: string }
 	): Promise<T> => {
 		const config: AxiosRequestConfig = {

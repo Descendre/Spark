@@ -1,12 +1,14 @@
 'use client';
 import {
 	HandleGetCharacterDetailProps,
+	HandleSetCharacterStyleProps,
 	UseCharacterProps,
 	VoicevoxCharacterDetailResponse,
 	VoicevoxSpeakersResponse,
 } from '@/interfaces';
 import { axiosFetch } from '@/libs';
 import { Context } from '@/provider';
+import { findCharacterByUUID } from '@/utils';
 import { useContext } from 'react';
 
 export const useCharacter = (): UseCharacterProps => {
@@ -16,11 +18,14 @@ export const useCharacter = (): UseCharacterProps => {
 	}
 
 	const {
+		selectedCharacterUuid,
 		characters,
 		setCharacters,
 		characterDetails,
 		setCharacterDetails,
 		setText,
+		style,
+		setStyle,
 	} = context;
 
 	const handleGetCharacters = async (): Promise<void> => {
@@ -35,10 +40,23 @@ export const useCharacter = (): UseCharacterProps => {
 			},
 			{} as { [uuid: string]: string }
 		);
-
 		setText((prevText) => ({
 			...prevText,
 			...newText,
+		}));
+
+		const newStyles = response.reduce(
+			(acc, character) => {
+				if (character.styles && character.styles.length > 0) {
+					acc[character.speaker_uuid] = character.styles[0];
+				}
+				return acc;
+			},
+			{} as { [uuid: string]: { name: string; id: number; type: string } }
+		);
+		setStyle((prevStyle) => ({
+			...prevStyle,
+			...newStyles,
 		}));
 
 		setCharacters(response);
@@ -59,11 +77,31 @@ export const useCharacter = (): UseCharacterProps => {
 		}));
 	};
 
+	const handleSetCharacterStyle = ({
+		index,
+	}: HandleSetCharacterStyleProps): void => {
+		if (!selectedCharacterUuid || !characters) return;
+		const currentCharacter = findCharacterByUUID({
+			array: characters,
+			uuid: selectedCharacterUuid,
+		});
+		if (!currentCharacter) return;
+		const newStyle = currentCharacter.styles[index];
+		if (!newStyle) return;
+		setStyle((prevStyle) => ({
+			...prevStyle,
+			[selectedCharacterUuid]: newStyle,
+		}));
+	};
+
 	return {
 		characters,
 		setCharacters,
 		characterDetails,
 		setCharacterDetails,
+		style,
+		setStyle,
 		handleGetCharacters,
+		handleSetCharacterStyle,
 	};
 };
