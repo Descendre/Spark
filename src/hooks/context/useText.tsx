@@ -1,9 +1,9 @@
 'use client';
-import { POST } from '@/app/api/voicevox/audioQuery/route';
 import {
 	HandleKeyDownProps,
 	HandleSetTextProps,
 	UseTextProps,
+	VoicevoxAudioQueryResponse,
 } from '@/interfaces';
 import { axiosFetch } from '@/libs';
 import { Context } from '@/provider';
@@ -35,10 +35,13 @@ export const useText = (): UseTextProps => {
 	const handeSendText = async (): Promise<void> => {
 		if (!selectedCharacterUuid || text[selectedCharacterUuid].length === 0)
 			return;
-		const response = await axiosFetch.post('/api/voicevox/audioQuery', {
-			text: text[selectedCharacterUuid],
-			speaker: style[selectedCharacterUuid].id,
-		});
+		const response = await axiosFetch.post<VoicevoxAudioQueryResponse>(
+			'/api/voicevox/audioQuery',
+			{
+				text: text[selectedCharacterUuid],
+				speaker: style[selectedCharacterUuid].id,
+			}
+		);
 		console.log(response);
 		setText((prevText) => ({
 			...prevText,
