@@ -3,6 +3,8 @@ import { KeyboardEvent } from 'react';
 export interface UseTextProps {
 	text: { [uuid: string]: text };
 	setText: React.Dispatch<React.SetStateAction<{ [uuid: string]: text }>>;
+	isSending: boolean;
+	setIsSending: React.Dispatch<React.SetStateAction<boolean>>;
 	handleSetText: ({ event }: HandleSetTextProps) => void;
 	handleKeyDown: ({ event }: HandleKeyDownProps) => void;
 	handeSendText: () => void;

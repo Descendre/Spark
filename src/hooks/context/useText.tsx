@@ -15,7 +15,14 @@ export const useText = (): UseTextProps => {
 		throw new Error('Context is not provided');
 	}
 
-	const { selectedCharacterUuid, text, setText, style } = context;
+	const {
+		selectedCharacterUuid,
+		text,
+		setText,
+		style,
+		isSending,
+		setIsSending,
+	} = context;
 
 	const handleSetText = ({ event }: HandleSetTextProps): void => {
 		if (!selectedCharacterUuid) return;
@@ -33,10 +40,15 @@ export const useText = (): UseTextProps => {
 	};
 
 	const handeSendText = async (): Promise<void> => {
-		if (!selectedCharacterUuid || text[selectedCharacterUuid].length === 0)
+		if (
+			isSending ||
+			!selectedCharacterUuid ||
+			text[selectedCharacterUuid].length === 0
+		)
 			return;
+		setIsSending(true);
 		const response = await axiosFetch.post<VoicevoxAudioQueryResponse>(
-			'/api/voicevox/audioQuery',
+			`/api/voicevox/audio/audioQuery`,
 			{
 				text: text[selectedCharacterUuid],
 				speaker: style[selectedCharacterUuid].id,
@@ -47,6 +59,7 @@ export const useText = (): UseTextProps => {
 			...prevText,
 			[selectedCharacterUuid]: '',
 		}));
+		setIsSending(false);
 	};
 
 	return {
@@ -55,5 +68,7 @@ export const useText = (): UseTextProps => {
 		handleSetText,
 		handleKeyDown,
 		handeSendText,
+		isSending,
+		setIsSending,
 	};
 };

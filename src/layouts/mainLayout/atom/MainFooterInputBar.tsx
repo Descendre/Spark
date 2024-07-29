@@ -1,13 +1,14 @@
 'use client';
 import { useLayout, usePalette, useText } from '@/hooks';
-import { Send } from '@mui/icons-material';
+import { HourglassTop, Send } from '@mui/icons-material';
 import { InputAdornment, TextField, Tooltip } from '@mui/material';
 
 export const MainFooterInputBar = () => {
 	const palette = usePalette();
 	const { selectedContent, selectedCharacterUuid } = useLayout();
-	const { text, handleSetText, handleKeyDown, handeSendText } = useText();
-	const disabled: boolean = selectedContent !== 'character';
+	const { text, handleSetText, handleKeyDown, handeSendText, isSending } =
+		useText();
+	const disabled: boolean = selectedContent !== 'character' || isSending;
 
 	return (
 		<>
@@ -51,29 +52,37 @@ export const MainFooterInputBar = () => {
 					endAdornment: (
 						<InputAdornment position="end">
 							<Tooltip title="送信" placement="top">
-								<Send
-									sx={{
-										color:
-											!selectedCharacterUuid ||
-											disabled ||
-											text[selectedCharacterUuid].length === 0
-												? palette.text.disabled
-												: palette.text.primary,
-										userSelect:
-											!selectedCharacterUuid ||
-											disabled ||
-											text[selectedCharacterUuid].length === 0
-												? 'none'
-												: 'auto',
-										cursor:
-											!selectedCharacterUuid ||
-											disabled ||
-											text[selectedCharacterUuid].length === 0
-												? 'auto'
-												: 'pointer',
-									}}
-									onClick={handeSendText}
-								/>
+								{isSending ? (
+									<HourglassTop
+										sx={{
+											color: palette.text.disabled,
+										}}
+									/>
+								) : (
+									<Send
+										sx={{
+											color:
+												!selectedCharacterUuid ||
+												disabled ||
+												text[selectedCharacterUuid].length === 0
+													? palette.text.disabled
+													: palette.text.primary,
+											userSelect:
+												!selectedCharacterUuid ||
+												disabled ||
+												text[selectedCharacterUuid].length === 0
+													? 'none'
+													: 'auto',
+											cursor:
+												!selectedCharacterUuid ||
+												disabled ||
+												text[selectedCharacterUuid].length === 0
+													? 'auto'
+													: 'pointer',
+										}}
+										onClick={handeSendText}
+									/>
+								)}
 							</Tooltip>
 						</InputAdornment>
 					),
