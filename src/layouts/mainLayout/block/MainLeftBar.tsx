@@ -11,7 +11,7 @@ export const MainLeftBar = () => {
 	const breakpoint = useBreakPoint();
 	const palette = usePalette();
 	const { characters } = useCharacter();
-	const { isLeftBar } = useLayout();
+	const { isLeftBar, isLogSelect } = useLayout();
 
 	return (
 		<>
@@ -43,17 +43,21 @@ export const MainLeftBar = () => {
 							},
 						}}
 					>
-						{characters
-							? characters.map((character, index) => (
-									<MainLeftBarListItem
-										key={character.speaker_uuid}
-										index={index}
-										uuid={character.speaker_uuid}
-									/>
-								))
-							: Array.from({ length: 30 }, (_, index) => (
-									<MainLeftBarListSkeleton key={index} />
-								))}
+						{isLogSelect ? (
+							<Box />
+						) : characters ? (
+							characters.map((character, index) => (
+								<MainLeftBarListItem
+									key={character.speaker_uuid}
+									index={index}
+									uuid={character.speaker_uuid}
+								/>
+							))
+						) : (
+							Array.from({ length: 30 }, (_, index) => (
+								<MainLeftBarListSkeleton key={index} />
+							))
+						)}
 					</List>
 				</Box>
 			</Box>

@@ -22,6 +22,8 @@ export interface ContextProviderProps {
 	setIsLeftBar: React.Dispatch<React.SetStateAction<boolean>>;
 	isLeftDrawer: boolean;
 	setIsLeftDrawer: React.Dispatch<React.SetStateAction<boolean>>;
+	isLogSelect: boolean;
+	setIsLogSelect: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type SelectedContentProps = 'noSelected' | 'character';

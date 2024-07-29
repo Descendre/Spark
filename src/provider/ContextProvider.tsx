@@ -23,6 +23,7 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 	>(null);
 	const [isLeftBar, setIsLeftBar] = useState<boolean>(true);
 	const [isLeftDrawer, setIsLeftDrawer] = useState<boolean>(false);
+	const [isLogSelect, setIsLogSelect] = useState<boolean>(false);
 
 	const contextValue = {
 		characters,
@@ -37,6 +38,8 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 		setIsLeftBar,
 		isLeftDrawer,
 		setIsLeftDrawer,
+		isLogSelect,
+		setIsLogSelect,
 	};
 
 	return <Context.Provider value={contextValue}>{children}</Context.Provider>;

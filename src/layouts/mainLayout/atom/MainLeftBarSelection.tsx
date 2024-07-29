@@ -1,10 +1,14 @@
 'use client';
 import { useLayout } from '@/hooks';
-import { FormatListBulleted, Restore } from '@mui/icons-material';
+import {
+	FormatListBulleted,
+	RecordVoiceOver,
+	Restore,
+} from '@mui/icons-material';
 import { Box, Tooltip } from '@mui/material';
 
 export const MainLeftBarSelection = () => {
-	const { setIsLeftBar } = useLayout();
+	const { setIsLeftBar, isLogSelect, setIsLogSelect } = useLayout();
 
 	return (
 		<Box
@@ -24,13 +28,29 @@ export const MainLeftBarSelection = () => {
 					onClick={() => setIsLeftBar(false)}
 				/>
 			</Tooltip>
-			<Tooltip title="チャットログ" placement="bottom">
-				<Restore
-					sx={{
-						cursor: 'pointer',
-					}}
-				/>
-			</Tooltip>
+			{!isLogSelect ? (
+				<Tooltip title="チャットログ" placement="bottom">
+					<span>
+						<Restore
+							sx={{
+								cursor: 'pointer',
+							}}
+							onClick={() => setIsLogSelect(true)}
+						/>
+					</span>
+				</Tooltip>
+			) : (
+				<Tooltip title="キャラクター" placement="bottom">
+					<span>
+						<RecordVoiceOver
+							sx={{
+								cursor: 'pointer',
+							}}
+							onClick={() => setIsLogSelect(false)}
+						/>
+					</span>
+				</Tooltip>
+			)}
 		</Box>
 	);
 };
