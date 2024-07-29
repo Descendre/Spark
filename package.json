@@ -16,9 +16,11 @@
 		"@mui/icons-material": "^5.16.5",
 		"@mui/material": "^5.16.5",
 		"@mui/material-nextjs": "^5.16.4",
+		"@prisma/client": "^5.17.0",
 		"axios": "^1.7.2",
 		"next": "14.2.5",
 		"node-vibrant": "^3.1.6",
+		"prisma": "^5.17.0",
 		"react": "^18",
 		"react-dom": "^18"
 	},
