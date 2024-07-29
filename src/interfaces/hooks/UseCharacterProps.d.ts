@@ -2,6 +2,7 @@ import {
 	VoicevoxCharacterDetailResponse,
 	VoicevoxSpeakersResponse,
 } from '../api';
+import { characterStyleProps } from '../provider';
 
 export interface UseCharacterProps {
 	characters: VoicevoxSpeakersResponse | null;
@@ -12,9 +13,18 @@ export interface UseCharacterProps {
 	setCharacterDetails: React.Dispatch<
 		React.SetStateAction<{ [uuid: string]: VoicevoxCharacterDetailResponse }>
 	>;
+	style: { [uuid: string]: characterStyleProps };
+	setStyle: React.Dispatch<
+		React.SetStateAction<{ [uuid: string]: characterStyleProps }>
+	>;
 	handleGetCharacters: () => Promise<void>;
+	handleSetCharacterStyle: ({ index }: HandleSetCharacterStyleProps) => void;
 }
 
 export interface HandleGetCharacterDetailProps {
 	characterUuid: string;
+}
+
+export interface HandleSetCharacterStyleProps {
+	index: number;
 }

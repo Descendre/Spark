@@ -32,7 +32,6 @@ export const useText = (): UseTextProps => {
 
 	const handeSendText = (): void => {
 		if (!selectedCharacterUuid) return;
-		console.log(text[selectedCharacterUuid]);
 		setText((prevText) => ({
 			...prevText,
 			[selectedCharacterUuid]: '',
