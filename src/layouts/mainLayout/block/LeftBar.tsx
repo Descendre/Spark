@@ -2,6 +2,7 @@
 import { useBreakPoint, useCharacter, useLayout, usePalette } from '@/hooks';
 import { Box, List } from '@mui/material';
 import { LeftBarListItem } from '../atom';
+import { LeftBarListSkeleton } from '../atom/LeftBarListSkeleton';
 
 export const LeftBar = () => {
 	const breakpoint = useBreakPoint();
@@ -29,7 +30,7 @@ export const LeftBar = () => {
 						width: '100%',
 						height: '100%',
 						padding: '10px',
-						overflowY: 'overlay',
+						overflowY: characters ? 'overlay' : 'hidden',
 						'&:not(:hover)': {
 							'&::-webkit-scrollbar-thumb': {
 								backgroundColor: 'transparent',
@@ -37,13 +38,17 @@ export const LeftBar = () => {
 						},
 					}}
 				>
-					{characters?.map((character, index) => (
-						<LeftBarListItem
-							key={character.speaker_uuid}
-							index={index}
-							uuid={character.speaker_uuid}
-						/>
-					))}
+					{characters
+						? characters.map((character, index) => (
+								<LeftBarListItem
+									key={character.speaker_uuid}
+									index={index}
+									uuid={character.speaker_uuid}
+								/>
+							))
+						: Array.from({ length: 30 }, (_, index) => (
+								<LeftBarListSkeleton key={index} />
+							))}
 				</List>
 			</Box>
 

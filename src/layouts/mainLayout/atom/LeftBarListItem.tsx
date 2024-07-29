@@ -1,10 +1,5 @@
 'use client';
-import {
-	useCharacter,
-	useDominantColors,
-	useLayout,
-	usePalette,
-} from '@/hooks';
+import { useCharacter, useLayout, usePalette } from '@/hooks';
 import { LeftBarListItemProps } from '@/interfaces';
 import {
 	Avatar,
@@ -38,7 +33,9 @@ export const LeftBarListItem = ({ index, uuid }: LeftBarListItemProps) => {
 						color: 'transparent',
 					},
 				}}
-				onClick={() => handleCharacterSelect({ uuid: uuid })}
+				onClick={() => {
+					handleCharacterSelect({ uuid: uuid });
+				}}
 			>
 				<ListItemAvatar>
 					<Avatar src={characterDetails[uuid]?.style_infos[0].icon} />
