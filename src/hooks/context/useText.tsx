@@ -31,7 +31,9 @@ export const useText = (): UseTextProps => {
 	};
 
 	const handeSendText = (): void => {
-		if (!selectedCharacterUuid) return;
+		if (!selectedCharacterUuid || text[selectedCharacterUuid].length === 0)
+			return;
+		console.log('送信');
 		setText((prevText) => ({
 			...prevText,
 			[selectedCharacterUuid]: '',
