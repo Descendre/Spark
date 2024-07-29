@@ -51,17 +51,15 @@ export const MainFooterInputBar = () => {
 					endAdornment: (
 						<InputAdornment position="end">
 							<Tooltip title="送信" placement="top">
-								<span>
-									<Send
-										sx={{
-											color: disabled
-												? palette.text.disabled
-												: palette.text.primary,
-											cursor: 'pointer',
-										}}
-										onClick={handeSendText}
-									/>
-								</span>
+								<Send
+									sx={{
+										color: disabled
+											? palette.text.disabled
+											: palette.text.primary,
+										cursor: 'pointer',
+									}}
+									onClick={handeSendText}
+								/>
 							</Tooltip>
 						</InputAdornment>
 					),
