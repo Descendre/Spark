@@ -21,6 +21,7 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 	const [selectedCharacterUuid, setSelectedCharacterUuid] = useState<
 		string | null
 	>(null);
+	const [isLeftBar, setIsLeftBar] = useState<boolean>(true);
 
 	const contextValue = {
 		characters,
@@ -31,6 +32,8 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 		setSelectedContent,
 		selectedCharacterUuid,
 		setSelectedCharacterUuid,
+		isLeftBar,
+		setIsLeftBar,
 	};
 
 	return <Context.Provider value={contextValue}>{children}</Context.Provider>;

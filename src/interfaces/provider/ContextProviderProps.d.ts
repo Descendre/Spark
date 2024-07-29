@@ -18,6 +18,8 @@ export interface ContextProviderProps {
 	>;
 	selectedCharacterUuid: string | null;
 	setSelectedCharacterUuid: React.Dispatch<React.SetStateAction<string | null>>;
+	isLeftBar: boolean;
+	setIsLeftBar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type SelectedContentProps = 'noSelected' | 'character';

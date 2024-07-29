@@ -2,9 +2,10 @@
 import { MainLayoutProps } from '@/interfaces';
 import { Footer, LeftBar, MainHeader } from './block';
 import { Box } from '@mui/material';
-import { useBreakPoint } from '@/hooks';
+import { useBreakPoint, useLayout } from '@/hooks';
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
+	const { isLeftBar } = useLayout();
 	const breakpoint = useBreakPoint();
 
 	return (
@@ -26,7 +27,9 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 					<Box
 						zIndex={50}
 						width={
-							['xs', 'sm'].includes(breakpoint) ? '100%' : 'calc(100% - 350px)'
+							['xs', 'sm'].includes(breakpoint) || !isLeftBar
+								? '100%'
+								: 'calc(100% - 350px)'
 						}
 						height="calc(100% - 100px)"
 						sx={{
