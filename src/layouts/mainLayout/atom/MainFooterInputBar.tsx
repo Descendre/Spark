@@ -59,7 +59,18 @@ export const MainFooterInputBar = () => {
 											text[selectedCharacterUuid].length === 0
 												? palette.text.disabled
 												: palette.text.primary,
-										cursor: 'pointer',
+										userSelect:
+											!selectedCharacterUuid ||
+											disabled ||
+											text[selectedCharacterUuid].length === 0
+												? 'none'
+												: 'auto',
+										cursor:
+											!selectedCharacterUuid ||
+											disabled ||
+											text[selectedCharacterUuid].length === 0
+												? 'auto'
+												: 'pointer',
 									}}
 									onClick={handeSendText}
 								/>
