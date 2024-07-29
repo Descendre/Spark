@@ -29,6 +29,7 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 	const [style, setStyle] = useState<{ [uuid: string]: characterStyleProps }>(
 		{}
 	);
+	const [isSending, setIsSending] = useState<boolean>(false);
 
 	const contextValue = {
 		characters,
@@ -49,6 +50,8 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 		setText,
 		style,
 		setStyle,
+		isSending,
+		setIsSending,
 	};
 
 	return <Context.Provider value={contextValue}>{children}</Context.Provider>;
