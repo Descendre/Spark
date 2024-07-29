@@ -18,6 +18,8 @@ export const useLayout = (): UseLayoutProps => {
 		setIsLeftBar,
 		isLeftDrawer,
 		setIsLeftDrawer,
+		isLogSelect,
+		setIsLogSelect,
 	} = context;
 
 	const handleCharacterSelect = ({
@@ -42,5 +44,7 @@ export const useLayout = (): UseLayoutProps => {
 		setIsLeftBar,
 		isLeftDrawer,
 		setIsLeftDrawer,
+		isLogSelect,
+		setIsLogSelect,
 	};
 };
