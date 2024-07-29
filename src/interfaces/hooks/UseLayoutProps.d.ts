@@ -8,6 +8,8 @@ export interface UseLayoutProps {
 	selectedCharacterUuid: string | null;
 	setSelectedCharacterUuid: React.Dispatch<React.SetStateAction<string | null>>;
 	handleCharacterSelect: ({ uuid }: HandleCharacterSelectProps) => void;
+	isLeftBar: boolean;
+	setIsLeftBar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface HandleCharacterSelectProps {

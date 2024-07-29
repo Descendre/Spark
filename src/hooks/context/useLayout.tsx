@@ -2,8 +2,10 @@
 import { HandleCharacterSelectProps, UseLayoutProps } from '@/interfaces';
 import { Context } from '@/provider';
 import { useContext } from 'react';
+import { useBreakPoint } from '../common';
 
 export const useLayout = (): UseLayoutProps => {
+	const breakpoint = useBreakPoint();
 	const context = useContext(Context);
 	if (!context) {
 		throw new Error('Context is not provided');
@@ -14,6 +16,8 @@ export const useLayout = (): UseLayoutProps => {
 		setSelectedContent,
 		selectedCharacterUuid,
 		setSelectedCharacterUuid,
+		isLeftBar,
+		setIsLeftBar,
 	} = context;
 
 	const handleCharacterSelect = ({
@@ -22,9 +26,15 @@ export const useLayout = (): UseLayoutProps => {
 		if (selectedCharacterUuid === uuid) {
 			setSelectedCharacterUuid(null);
 			setSelectedContent('noSelected');
+			if (['xs', 'sm'].includes(breakpoint)) {
+				setIsLeftBar(false);
+			}
 		} else {
 			setSelectedCharacterUuid(uuid);
 			setSelectedContent('character');
+			if (['xs', 'sm'].includes(breakpoint)) {
+				setIsLeftBar(false);
+			}
 		}
 	};
 
@@ -34,5 +44,7 @@ export const useLayout = (): UseLayoutProps => {
 		selectedCharacterUuid,
 		setSelectedCharacterUuid,
 		handleCharacterSelect,
+		isLeftBar,
+		setIsLeftBar,
 	};
 };

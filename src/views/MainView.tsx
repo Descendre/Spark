@@ -1,5 +1,5 @@
 'use client';
-
+import { ContentHeading } from '@/components';
 import { Character, NoSelected } from '@/contents';
 import { useLayout, usePalette } from '@/hooks';
 import { Box } from '@mui/material';
@@ -10,11 +10,13 @@ export const MainView = () => {
 
 	return (
 		<Box
+			position="relative"
 			width="100%"
 			margin="0 auto"
 			height="100%"
 			bgcolor={palette.background.default}
 		>
+			<ContentHeading />
 			{selectedContent === 'character' ? <Character /> : <NoSelected />}
 		</Box>
 	);
