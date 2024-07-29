@@ -14,7 +14,7 @@ export const FooterInputBar = () => {
 				maxRows={6}
 				placeholder="AIキャラクターにメッセージを送信する"
 				sx={{
-					width: '80%',
+					width: '90%',
 					'& .MuiOutlinedInput-root': {
 						backgroundColor: palette.component.footer.inputBar,
 						borderRadius: '30px',
@@ -25,13 +25,13 @@ export const FooterInputBar = () => {
 							},
 						},
 						'& fieldset': {
-							borderColor: palette.layout.line.sub,
+							borderColor: palette.layout.mainLayout.line.sub,
 						},
 						'&:hover fieldset': {
-							borderColor: palette.layout.line.sub,
+							borderColor: palette.layout.mainLayout.line.sub,
 						},
 						'&.Mui-focused fieldset': {
-							borderColor: palette.layout.line.sub,
+							borderColor: palette.layout.mainLayout.line.sub,
 							borderWidth: '1px',
 						},
 					},

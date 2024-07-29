@@ -1,3 +1,4 @@
 export * from './MainHeader';
-export * from './LeftBar';
-export * from './Footer';
+export * from './MainLeftDrawer';
+export * from './MainFooter';
+export * from './MainLeftBar';

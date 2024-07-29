@@ -1,27 +1,31 @@
 'use client';
 import { hexToRgba } from '@/utils';
 import { createTheme } from '@mui/material';
-import { blue } from '@mui/material/colors';
+import { purple } from '@mui/material/colors';
 
 export const darkTheme = createTheme({
 	palette: {
 		mode: 'dark',
 		primary: {
-			main: blue[400],
+			main: purple['A700'],
 		},
 		layout: {
-			primary: '#000000',
-			line: {
-				main: '#333333',
-				sub: '#283848',
-			},
-			selectedCharacterBg: {
-				primary: `${hexToRgba('#79197C')}, 0.5`,
-				secondary: `${hexToRgba('#00E5FF')}, 0.5`,
-			},
-			hoverCharacterBg: {
-				primary: `${hexToRgba('#79197C')}, 0.2`,
-				secondary: `${hexToRgba('#00E5FF')}, 0.2`,
+			mainLayout: {
+				header: '#0d1318',
+				leftBar: '#090c10',
+				leftDrawer: '#0d1318',
+				line: {
+					main: '#333333',
+					sub: '#283848',
+				},
+				selectedCharacterBg: {
+					primary: `${hexToRgba('#79197C')}, 0.5`,
+					secondary: `${hexToRgba('#00E5FF')}, 0.5`,
+				},
+				hoverCharacterBg: {
+					primary: `${hexToRgba('#79197C')}, 0.2`,
+					secondary: `${hexToRgba('#00E5FF')}, 0.2`,
+				},
 			},
 		},
 		component: {

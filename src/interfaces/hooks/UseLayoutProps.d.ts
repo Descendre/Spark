@@ -10,6 +10,8 @@ export interface UseLayoutProps {
 	handleCharacterSelect: ({ uuid }: HandleCharacterSelectProps) => void;
 	isLeftBar: boolean;
 	setIsLeftBar: React.Dispatch<React.SetStateAction<boolean>>;
+	isLeftDrawer: boolean;
+	setIsLeftDrawer: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface HandleCharacterSelectProps {

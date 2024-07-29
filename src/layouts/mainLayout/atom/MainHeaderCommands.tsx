@@ -1,9 +1,9 @@
 'use client';
 import { useLayout } from '@/hooks';
 import { FormatListBulleted } from '@mui/icons-material';
-import { Box } from '@mui/material';
+import { Box, Tooltip } from '@mui/material';
 
-export const ContentHeadingCommands = () => {
+export const MainHeaderCommands = () => {
 	const { setIsLeftBar } = useLayout();
 
 	return (
@@ -14,13 +14,14 @@ export const ContentHeadingCommands = () => {
 			gap="10px"
 			height="100%"
 		>
-			<FormatListBulleted
-				fontSize="small"
-				sx={{
-					cursor: 'pointer',
-				}}
-				onClick={() => setIsLeftBar((prev) => !prev)}
-			/>
+			<Tooltip title="サイドバーを開く" placement="bottom">
+				<FormatListBulleted
+					sx={{
+						cursor: 'pointer',
+					}}
+					onClick={() => setIsLeftBar(true)}
+				/>
+			</Tooltip>
 		</Box>
 	);
 };

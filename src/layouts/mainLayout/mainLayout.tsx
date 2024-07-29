@@ -1,12 +1,14 @@
 'use client';
 import { MainLayoutProps } from '@/interfaces';
-import { Footer, LeftBar, MainHeader } from './block';
+import { MainFooter, MainHeader, MainLeftBar, MainLeftDrawer } from './block';
 import { Box } from '@mui/material';
 import { useBreakPoint, useLayout } from '@/hooks';
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
 	const { isLeftBar } = useLayout();
 	const breakpoint = useBreakPoint();
+	const isLeftBarOpen: boolean =
+		!['xs', 'sm'].includes(breakpoint) && isLeftBar;
 
 	return (
 		<>
@@ -23,14 +25,10 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 			>
 				<MainHeader />
 				<Box display="flex" width="100%" height="calc(100% - 60px)">
-					<LeftBar />
+					{isLeftBarOpen && <MainLeftBar />}
 					<Box
 						zIndex={50}
-						width={
-							['xs', 'sm'].includes(breakpoint) || !isLeftBar
-								? '100%'
-								: 'calc(100% - 350px)'
-						}
+						width={isLeftBarOpen ? 'calc(100% - 350px)' : '100%'}
 						height="calc(100% - 100px)"
 						sx={{
 							overflowY: 'overlay',
@@ -42,10 +40,12 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 						}}
 					>
 						{children}
-						<Footer />
+						<MainFooter />
 					</Box>
 				</Box>
 			</Box>
+
+			{['xs', 'sm'].includes(breakpoint) && <MainLeftDrawer />}
 		</>
 	);
 };

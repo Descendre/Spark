@@ -8,7 +8,7 @@ import {
 	ListItemText,
 } from '@mui/material';
 
-export const LeftBarListItem = ({ index, uuid }: LeftBarListItemProps) => {
+export const MainLeftBarListItem = ({ index, uuid }: LeftBarListItemProps) => {
 	const { characters, characterDetails } = useCharacter();
 	const { selectedCharacterUuid, handleCharacterSelect } = useLayout();
 	const palette = usePalette();
@@ -22,12 +22,12 @@ export const LeftBarListItem = ({ index, uuid }: LeftBarListItemProps) => {
 					height: '70px',
 					borderRadius: '10px',
 					background: isSelected
-						? `linear-gradient(to right, rgba(${palette.layout.selectedCharacterBg.primary}), rgba(${palette.layout.selectedCharacterBg.secondary}))`
+						? `linear-gradient(to right, rgba(${palette.layout.mainLayout.selectedCharacterBg.primary}), rgba(${palette.layout.mainLayout.selectedCharacterBg.secondary}))`
 						: 'transparent',
 					'&:hover': {
 						background: isSelected
-							? `linear-gradient(to right, rgba(${palette.layout.selectedCharacterBg.primary}), rgba(${palette.layout.selectedCharacterBg.secondary}))`
-							: `linear-gradient(to right, rgba(${palette.layout.hoverCharacterBg.primary}), rgba(${palette.layout.hoverCharacterBg.secondary}))`,
+							? `linear-gradient(to right, rgba(${palette.layout.mainLayout.selectedCharacterBg.primary}), rgba(${palette.layout.mainLayout.selectedCharacterBg.secondary}))`
+							: `linear-gradient(to right, rgba(${palette.layout.mainLayout.hoverCharacterBg.primary}), rgba(${palette.layout.mainLayout.hoverCharacterBg.secondary}))`,
 					},
 					'.MuiTouchRipple-child': {
 						color: 'transparent',
