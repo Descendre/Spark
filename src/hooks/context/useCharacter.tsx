@@ -15,13 +15,32 @@ export const useCharacter = (): UseCharacterProps => {
 		throw new Error('Context is not provided');
 	}
 
-	const { characters, setCharacters, characterDetails, setCharacterDetails } =
-		context;
+	const {
+		characters,
+		setCharacters,
+		characterDetails,
+		setCharacterDetails,
+		setText,
+	} = context;
 
 	const handleGetCharacters = async (): Promise<void> => {
 		const response = await axiosFetch.get<VoicevoxSpeakersResponse>(
 			'/api/voicevox/characters'
 		);
+
+		const newText = response.reduce(
+			(acc, character) => {
+				acc[character.speaker_uuid] = '';
+				return acc;
+			},
+			{} as { [uuid: string]: string }
+		);
+
+		setText((prevText) => ({
+			...prevText,
+			...newText,
+		}));
+
 		setCharacters(response);
 		response.map((chracter) => {
 			handleGetCharacterDetail({ characterUuid: chracter.speaker_uuid });

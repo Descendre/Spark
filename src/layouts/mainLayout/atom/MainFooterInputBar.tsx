@@ -1,16 +1,20 @@
 'use client';
-import { useLayout, usePalette } from '@/hooks';
+import { useLayout, usePalette, useText } from '@/hooks';
 import { Send } from '@mui/icons-material';
-import { InputAdornment, TextField } from '@mui/material';
+import { InputAdornment, TextField, Tooltip } from '@mui/material';
 
 export const MainFooterInputBar = () => {
 	const palette = usePalette();
-	const { selectedContent } = useLayout();
+	const { selectedContent, selectedCharacterUuid } = useLayout();
+	const { text, handleSetText, handleKeyDown, handeSendText } = useText();
 	const disabled: boolean = selectedContent !== 'character';
 
 	return (
 		<>
 			<TextField
+				value={selectedCharacterUuid ? text[selectedCharacterUuid] : ''}
+				onChange={(event) => handleSetText({ event: event })}
+				onKeyDown={(event) => handleKeyDown({ event: event })}
 				disabled={disabled}
 				size="small"
 				multiline
@@ -46,13 +50,19 @@ export const MainFooterInputBar = () => {
 				InputProps={{
 					endAdornment: (
 						<InputAdornment position="end">
-							<Send
-								sx={{
-									color: disabled
-										? palette.text.disabled
-										: palette.text.primary,
-								}}
-							/>
+							<Tooltip title="送信" placement="top">
+								<span>
+									<Send
+										sx={{
+											color: disabled
+												? palette.text.disabled
+												: palette.text.primary,
+											cursor: 'pointer',
+										}}
+										onClick={handeSendText}
+									/>
+								</span>
+							</Tooltip>
 						</InputAdornment>
 					),
 				}}

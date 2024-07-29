@@ -24,6 +24,8 @@ export interface ContextProviderProps {
 	setIsLeftDrawer: React.Dispatch<React.SetStateAction<boolean>>;
 	isLogSelect: boolean;
 	setIsLogSelect: React.Dispatch<React.SetStateAction<boolean>>;
+	text: { [uuid: string]: text };
+	setText: React.Dispatch<React.SetStateAction<{ [uuid: string]: text }>>;
 }
 
 export type SelectedContentProps = 'noSelected' | 'character';
