@@ -23,7 +23,7 @@ model Chat{
   chatRoomId String
   speaker Speaker
   styleType Int?
-  charactorID String?
+  characterID String?
   context String
   chatRoom ChatRoom @relation(fields: [chatRoomId], references: [id])
   createdAt DateTime @default(now())
@@ -33,7 +33,7 @@ model Chat{
 model ChatRoom{
   id        String   @id @default(uuid()) 
   roomName  String
-  charactorID String
+  characterID String
   createdAt DateTime @default(now())
   chat Chat[]
 }
