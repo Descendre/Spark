@@ -47,19 +47,35 @@ export const useText = (): UseTextProps => {
 		)
 			return;
 		setIsSending(true);
-		const response = await axiosFetch.post<VoicevoxAudioQueryResponse>(
-			`/api/voicevox/audio/audioQuery`,
+		const audioQueryResponse =
+			await axiosFetch.post<VoicevoxAudioQueryResponse>(
+				`/api/voicevox/audio/audioQuery`,
+				{
+					text: text[selectedCharacterUuid],
+					speaker: style[selectedCharacterUuid].id,
+				}
+			);
+		const synthesisResponse = await axiosFetch.post<string>(
+			`/api/voicevox/audio/synthesis`,
 			{
-				text: text[selectedCharacterUuid],
 				speaker: style[selectedCharacterUuid].id,
+				audioQueryResponse: audioQueryResponse,
 			}
 		);
-		console.log(response);
+		const audio = new Audio(synthesisResponse);
+		audio.addEventListener('ended', () => {
+			setIsSending(false);
+		});
+		await audio.play();
+
+		await axiosFetch.delete(`/api/voicevox/audio/synthesis`, {
+			fileName: synthesisResponse,
+		});
+
 		setText((prevText) => ({
 			...prevText,
 			[selectedCharacterUuid]: '',
 		}));
-		setIsSending(false);
 	};
 
 	return {
