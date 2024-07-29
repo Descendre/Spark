@@ -30,6 +30,8 @@ export interface ContextProviderProps {
 	setStyle: React.Dispatch<
 		React.SetStateAction<{ [uuid: string]: characterStyleProps }>
 	>;
+	isSending: boolean;
+	setIsSending: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type SelectedContentProps = 'noSelected' | 'character';
