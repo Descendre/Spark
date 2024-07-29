@@ -1,5 +1,6 @@
 'use client';
 import {
+	characterStyleProps,
 	ContextProviderProps,
 	SelectedContentProps,
 	VoicevoxCharacterDetailResponse,
@@ -25,6 +26,9 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 	const [isLeftDrawer, setIsLeftDrawer] = useState<boolean>(false);
 	const [isLogSelect, setIsLogSelect] = useState<boolean>(false);
 	const [text, setText] = useState<{ [uuid: string]: string }>({});
+	const [style, setStyle] = useState<{ [uuid: string]: characterStyleProps }>(
+		{}
+	);
 
 	const contextValue = {
 		characters,
@@ -43,6 +47,8 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 		setIsLogSelect,
 		text,
 		setText,
+		style,
+		setStyle,
 	};
 
 	return <Context.Provider value={contextValue}>{children}</Context.Provider>;
