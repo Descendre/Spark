@@ -11,11 +11,23 @@ export const darkTheme = createTheme({
 		},
 		layout: {
 			mainLayout: {
-				header: '#0d1318',
-				leftBar: '#090c10',
-				leftDrawer: '#0d1318',
+				header: {
+					bg: '#0d1318',
+					callStart: '#00BB00',
+					callEnd: '#DD0000',
+					disabled: '#333333',
+				},
+				leftBar: {
+					bg: '#090c10',
+				},
+				leftDrawer: {
+					bg: '#0d1318',
+				},
+				footer: {
+					inputBar: '#161f28',
+				},
 				line: {
-					main: '#333333',
+					main: '#525f6c',
 					sub: '#283848',
 				},
 				selectedCharacterBg: {
@@ -26,11 +38,6 @@ export const darkTheme = createTheme({
 					primary: `${hexToRgba('#79197C')}, 0.2`,
 					secondary: `${hexToRgba('#00E5FF')}, 0.2`,
 				},
-			},
-		},
-		component: {
-			footer: {
-				inputBar: '#161f28',
 			},
 		},
 		background: {

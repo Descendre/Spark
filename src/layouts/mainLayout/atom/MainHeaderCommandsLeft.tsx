@@ -3,7 +3,7 @@ import { useLayout } from '@/hooks';
 import { FormatListBulleted } from '@mui/icons-material';
 import { Box, Tooltip } from '@mui/material';
 
-export const MainHeaderCommands = () => {
+export const MainHeaderCommandsLeft = () => {
 	const { setIsLeftBar } = useLayout();
 
 	return (

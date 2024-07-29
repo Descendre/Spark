@@ -1,14 +1,17 @@
 'use client';
-import { usePalette } from '@/hooks';
+import { useLayout, usePalette } from '@/hooks';
 import { Send } from '@mui/icons-material';
 import { InputAdornment, TextField } from '@mui/material';
 
-export const FooterInputBar = () => {
+export const MainFooterInputBar = () => {
 	const palette = usePalette();
+	const { selectedContent } = useLayout();
+	const disabled: boolean = selectedContent !== 'character';
 
 	return (
 		<>
 			<TextField
+				disabled={disabled}
 				size="small"
 				multiline
 				maxRows={6}
@@ -16,7 +19,7 @@ export const FooterInputBar = () => {
 				sx={{
 					width: '90%',
 					'& .MuiOutlinedInput-root': {
-						backgroundColor: palette.component.footer.inputBar,
+						backgroundColor: palette.layout.mainLayout.footer.inputBar,
 						borderRadius: '30px',
 						'& .MuiInputBase-input': {
 							padding: '4px 30px',
@@ -25,12 +28,16 @@ export const FooterInputBar = () => {
 							},
 						},
 						'& fieldset': {
-							borderColor: palette.layout.mainLayout.line.sub,
+							borderColor: palette.layout.mainLayout.line.main,
 						},
 						'&:hover fieldset': {
-							borderColor: palette.layout.mainLayout.line.sub,
+							borderColor: palette.layout.mainLayout.line.main,
 						},
 						'&.Mui-focused fieldset': {
+							borderColor: palette.layout.mainLayout.line.main,
+							borderWidth: '1px',
+						},
+						'&.Mui-disabled fieldset': {
 							borderColor: palette.layout.mainLayout.line.sub,
 							borderWidth: '1px',
 						},
@@ -39,7 +46,13 @@ export const FooterInputBar = () => {
 				InputProps={{
 					endAdornment: (
 						<InputAdornment position="end">
-							<Send />
+							<Send
+								sx={{
+									color: disabled
+										? palette.text.disabled
+										: palette.text.primary,
+								}}
+							/>
 						</InputAdornment>
 					),
 				}}

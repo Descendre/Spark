@@ -21,7 +21,7 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 	const [selectedCharacterUuid, setSelectedCharacterUuid] = useState<
 		string | null
 	>(null);
-	const [isLeftBar, setIsLeftBar] = useState<boolean>(false);
+	const [isLeftBar, setIsLeftBar] = useState<boolean>(true);
 	const [isLeftDrawer, setIsLeftDrawer] = useState<boolean>(false);
 
 	const contextValue = {

@@ -30,7 +30,11 @@ export const MainLeftDrawer = () => {
 					zIndex: 100,
 				}}
 			>
-				<Box width="100%" height="100%" bgcolor={palette.background.default}>
+				<Box
+					width="100%"
+					height="100%"
+					bgcolor={palette.layout.mainLayout.leftDrawer.bg}
+				>
 					<MainLeftDrawerSelection />
 					<List
 						sx={{

@@ -1,7 +1,7 @@
 'use client';
 import { Box } from '@mui/material';
-import { FooterInputBar } from '../atom';
 import { useBreakPoint, useLayout } from '@/hooks';
+import { MainFooterInputBar } from '../atom';
 
 export const MainFooter = () => {
 	const { isLeftBar } = useLayout();
@@ -29,7 +29,7 @@ export const MainFooter = () => {
 				maxWidth="1000px"
 				marginBottom="40px"
 			>
-				<FooterInputBar />
+				<MainFooterInputBar />
 			</Box>
 		</Box>
 	);
