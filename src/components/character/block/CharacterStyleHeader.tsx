@@ -25,7 +25,7 @@ export const CharacterStyleHeader = () => {
 			gap="15px"
 			padding="0 15px"
 			width={isLeftBarOpen ? 'calc(100% - 350px)' : '100%'}
-			height="50px"
+			height="40px"
 			sx={{
 				overflowX: 'scroll',
 				'&::-webkit-scrollbar': {
