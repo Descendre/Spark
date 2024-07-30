@@ -13,28 +13,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Speaker{
+model ChatRoom {
+  id String @id @default(uuid())
+  roomName String
+  speakerUuid String
+  chats Chat[]
+  createdAt DateTime @default(now())
+}
+
+model Chat {
+  id Int @id @default(autoincrement())
+  chatRoomId String
+  speakerType SpeakerType
+  speakerUuid String?
+  speakerStyle Int?
+  content String
+  createdAt DateTime @default(now())
+  chatRoom ChatRoom @relation(fields: [chatRoomId], references: [id])
+}
+
+enum SpeakerType {
   USER
   AI
-}
-
-model Chat{
-  id        String   @id @default(uuid()) 
-  chatRoomId String
-  speaker Speaker
-  styleType Int?
-  characterID String?
-  context String
-  chatRoom ChatRoom @relation(fields: [chatRoomId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
-}
-
-model ChatRoom{
-  id        String   @id @default(uuid()) 
-  roomName  String
-  characterID String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
-  chat Chat[]
 }

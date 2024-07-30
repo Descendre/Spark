@@ -11,9 +11,9 @@ import {
 
 export const MainLeftBarListItem = ({ index, uuid }: LeftBarListItemProps) => {
 	const { characters, characterDetails } = useCharacter();
-	const { selectedCharacterUuid, handleCharacterSelect } = useLayout();
+	const { selectedItem, handleCharacterSelect } = useLayout();
 	const palette = usePalette();
-	const isSelected: boolean = selectedCharacterUuid === uuid;
+	const isSelected: boolean = selectedItem === uuid;
 
 	return (
 		<>

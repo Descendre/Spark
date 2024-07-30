@@ -5,11 +5,11 @@ import { Box, Typography } from '@mui/material';
 
 export const MainFooterCredit = () => {
 	const palette = usePalette();
-	const { selectedCharacterUuid } = useLayout();
+	const { selectedItem } = useLayout();
 	const { characters } = useCharacter();
 	const currentCharacter = findCharacterByUUID({
 		array: characters,
-		uuid: selectedCharacterUuid || '',
+		uuid: selectedItem || '',
 	});
 
 	return (
@@ -27,6 +27,7 @@ export const MainFooterCredit = () => {
 				color={palette.text.disabled}
 				width="100%"
 				textAlign="end"
+				fontSize="0.8rem"
 			>
 				{`Material UI (MUI)　` +
 					(currentCharacter ? `VOICEVOX:${currentCharacter?.name}` : '')}

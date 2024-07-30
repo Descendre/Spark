@@ -5,17 +5,22 @@ export interface UseLayoutProps {
 	setSelectedContent: React.Dispatch<
 		React.SetStateAction<SelectedContentProps>
 	>;
-	selectedCharacterUuid: string | null;
-	setSelectedCharacterUuid: React.Dispatch<React.SetStateAction<string | null>>;
-	handleCharacterSelect: ({ uuid }: HandleCharacterSelectProps) => void;
+	selectedItem: string | null;
+	setSelectedItem: React.Dispatch<React.SetStateAction<string | null>>;
 	isLeftBar: boolean;
 	setIsLeftBar: React.Dispatch<React.SetStateAction<boolean>>;
 	isLeftDrawer: boolean;
 	setIsLeftDrawer: React.Dispatch<React.SetStateAction<boolean>>;
 	isLogSelect: boolean;
 	setIsLogSelect: React.Dispatch<React.SetStateAction<boolean>>;
+	handleCharacterSelect: ({ uuid }: HandleCharacterSelectProps) => void;
+	handleLogSelect: ({ chatRoomId }: HandleLogSelectProps) => void;
 }
 
 export interface HandleCharacterSelectProps {
 	uuid: string;
+}
+
+export interface HandleLogSelectProps {
+	chatRoomId: string;
 }

@@ -18,7 +18,6 @@ export const useCharacter = (): UseCharacterProps => {
 	}
 
 	const {
-		selectedCharacterUuid,
 		characters,
 		setCharacters,
 		characterDetails,
@@ -79,18 +78,19 @@ export const useCharacter = (): UseCharacterProps => {
 
 	const handleSetCharacterStyle = ({
 		index,
+		speakerUuid,
 	}: HandleSetCharacterStyleProps): void => {
-		if (!selectedCharacterUuid || !characters) return;
+		if (!speakerUuid || !characters) return;
 		const currentCharacter = findCharacterByUUID({
 			array: characters,
-			uuid: selectedCharacterUuid,
+			uuid: speakerUuid,
 		});
 		if (!currentCharacter) return;
 		const newStyle = currentCharacter.styles[index];
 		if (!newStyle) return;
 		setStyle((prevStyle) => ({
 			...prevStyle,
-			[selectedCharacterUuid]: newStyle,
+			[speakerUuid]: newStyle,
 		}));
 	};
 

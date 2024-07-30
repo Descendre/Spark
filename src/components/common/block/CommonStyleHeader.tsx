@@ -1,18 +1,19 @@
 'use client';
-import { useBreakPoint, useCharacter, useLayout } from '@/hooks';
+import { useBreakPoint, useCharacter, useChat, useLayout } from '@/hooks';
 import { findCharacterByUUID } from '@/utils';
 import { Box } from '@mui/material';
-import { CharacterStyleHeaderChip } from '../atom';
+import { CommonStyleHeaderChip } from '../atom';
+import { CommonStyleHeaderProps } from '@/interfaces';
 
-export const CharacterStyleHeader = () => {
-	const { selectedCharacterUuid, isLeftBar } = useLayout();
+export const CommonStyleHeader = ({ speakerUuid }: CommonStyleHeaderProps) => {
+	const { isLeftBar, selectedItem } = useLayout();
 	const { characters, characterDetails } = useCharacter();
 	const breakpoint = useBreakPoint();
 	const isLeftBarOpen: boolean =
 		!['xs', 'sm'].includes(breakpoint) && isLeftBar;
 	const currentCharacter = findCharacterByUUID({
 		array: characters,
-		uuid: selectedCharacterUuid,
+		uuid: speakerUuid,
 	});
 
 	return (
@@ -37,14 +38,15 @@ export const CharacterStyleHeader = () => {
 			}}
 		>
 			{currentCharacter &&
-				selectedCharacterUuid &&
+				selectedItem &&
 				currentCharacter.styles.map((style, index) => (
-					<CharacterStyleHeaderChip
+					<CommonStyleHeaderChip
 						key={style.id}
-						url={characterDetails[selectedCharacterUuid]?.style_infos[0].icon}
+						url={characterDetails[speakerUuid]?.style_infos[0].icon}
 						label={style.name}
 						id={style.id}
 						index={index}
+						speakerUuid={speakerUuid}
 					/>
 				))}
 		</Box>

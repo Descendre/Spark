@@ -1,9 +1,15 @@
 'use client';
-import { HandleCharacterSelectProps, UseLayoutProps } from '@/interfaces';
+import {
+	HandleCharacterSelectProps,
+	HandleLogSelectProps,
+	UseLayoutProps,
+} from '@/interfaces';
 import { Context } from '@/provider';
+import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 
 export const useLayout = (): UseLayoutProps => {
+	const router = useRouter();
 	const context = useContext(Context);
 	if (!context) {
 		throw new Error('Context is not provided');
@@ -12,8 +18,8 @@ export const useLayout = (): UseLayoutProps => {
 	const {
 		selectedContent,
 		setSelectedContent,
-		selectedCharacterUuid,
-		setSelectedCharacterUuid,
+		selectedItem,
+		setSelectedItem,
 		isLeftBar,
 		setIsLeftBar,
 		isLeftDrawer,
@@ -25,26 +31,39 @@ export const useLayout = (): UseLayoutProps => {
 	const handleCharacterSelect = ({
 		uuid,
 	}: HandleCharacterSelectProps): void => {
-		if (selectedCharacterUuid === uuid) {
-			setSelectedCharacterUuid(null);
+		if (selectedItem === uuid) {
+			setSelectedItem(null);
 			setSelectedContent('noSelected');
 		} else {
-			setSelectedCharacterUuid(uuid);
+			setSelectedItem(uuid);
 			setSelectedContent('character');
+			router.push('/');
+		}
+	};
+
+	const handleLogSelect = ({ chatRoomId }: HandleLogSelectProps): void => {
+		if (selectedItem === chatRoomId) {
+			setSelectedItem(null);
+			setSelectedContent('noSelected');
+		} else {
+			setSelectedItem(chatRoomId);
+			setSelectedContent('log');
+			router.push(`/c/${chatRoomId}`);
 		}
 	};
 
 	return {
 		selectedContent,
 		setSelectedContent,
-		selectedCharacterUuid,
-		setSelectedCharacterUuid,
-		handleCharacterSelect,
+		selectedItem,
+		setSelectedItem,
 		isLeftBar,
 		setIsLeftBar,
 		isLeftDrawer,
 		setIsLeftDrawer,
 		isLogSelect,
 		setIsLogSelect,
+		handleCharacterSelect,
+		handleLogSelect,
 	};
 };

@@ -9,6 +9,8 @@ import {
 	ListItemText,
 	Skeleton,
 } from '@mui/material';
+import { useParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 export const MainLeftBarListItemLog = ({
 	roomId,
@@ -17,13 +19,20 @@ export const MainLeftBarListItemLog = ({
 	createdAt,
 }: LeftBarListItemLogProps) => {
 	const { characters, characterDetails } = useCharacter();
-	const { selectedCharacterUuid } = useLayout();
+	const { selectedItem, setSelectedItem, handleLogSelect } = useLayout();
 	const palette = usePalette();
 	const currentCharacter = findCharacterByUUID({
 		array: characters,
 		uuid: speakerUuid,
 	});
-	const isSelected: boolean = selectedCharacterUuid === speakerUuid;
+	const { chatRoomUUID } = useParams();
+	const isSelected: boolean = selectedItem === roomId;
+
+	useEffect(() => {
+		if (chatRoomUUID && typeof chatRoomUUID === 'string') {
+			setSelectedItem(chatRoomUUID);
+		}
+	}, []);
 
 	return (
 		<>
@@ -45,7 +54,7 @@ export const MainLeftBarListItemLog = ({
 					},
 				}}
 				onClick={() => {
-					// handleCharacterSelect({ uuid: uuid });
+					handleLogSelect({ chatRoomId: roomId });
 				}}
 			>
 				<ListItemAvatar>
