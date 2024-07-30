@@ -30,7 +30,7 @@ export const CommonStyleHeader = ({ speakerUuid }: CommonStyleHeaderProps) => {
 			height="40px"
 			sx={{
 				overflowX: 'scroll',
-				backdropFilter: 'blur(10px)',
+				backdropFilter: 'blur(50px)',
 				'&::-webkit-scrollbar': {
 					width: '0px',
 					height: '0px',

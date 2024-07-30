@@ -20,7 +20,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 					alignItems: 'start',
 					height: '100vh',
 					width: '100%',
-					overflowX: 'hidden',
+					overflow: 'hidden',
 				}}
 			>
 				<MainHeader />
@@ -30,14 +30,6 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 						zIndex={50}
 						width={isLeftBarOpen ? 'calc(100% - 350px)' : '100%'}
 						height="calc(100% - 100px)"
-						sx={{
-							overflowY: 'overlay',
-							'&:not(:hover)': {
-								'&::-webkit-scrollbar-thumb': {
-									backgroundColor: 'transparent',
-								},
-							},
-						}}
 					>
 						{children}
 						<MainFooter />
