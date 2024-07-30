@@ -24,10 +24,11 @@ export const CharacterStyleHeader = () => {
 			alignItems="center"
 			gap="15px"
 			padding="0 15px"
-			width={isLeftBarOpen ? 'calc(100% - 350px)' : '100%'}
+			width={isLeftBarOpen ? 'calc(100% - 350px - 10px)' : 'calc(100% - 10px)'}
 			height="40px"
 			sx={{
 				overflowX: 'scroll',
+				backdropFilter: 'blur(10px)',
 				'&::-webkit-scrollbar': {
 					width: '0px',
 					height: '0px',

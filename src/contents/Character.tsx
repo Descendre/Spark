@@ -1,10 +1,18 @@
-import { CharacterStyleHeader } from '@/components';
+import { CharacterChatArea, CharacterStyleHeader } from '@/components';
+import { Box } from '@mui/material';
 import React from 'react';
 
 export const Character = () => {
 	return (
-		<div style={{ height: '1000px' }}>
+		<Box
+			display="flex"
+			justifyContent="center"
+			alignItems="start"
+			width="100%"
+			height="100%"
+		>
 			<CharacterStyleHeader />
-		</div>
+			<CharacterChatArea />
+		</Box>
 	);
 };

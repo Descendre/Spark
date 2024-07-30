@@ -1,5 +1,6 @@
 'use client';
-import { useLayout, usePalette, useText } from '@/hooks';
+import { useCharacter, useLayout, usePalette, useText } from '@/hooks';
+import { findCharacterByUUID } from '@/utils';
 import { HourglassTop, Send } from '@mui/icons-material';
 import { InputAdornment, TextField, Tooltip } from '@mui/material';
 
@@ -8,7 +9,12 @@ export const MainFooterInputBar = () => {
 	const { selectedContent, selectedCharacterUuid } = useLayout();
 	const { text, handleSetText, handleKeyDown, handeSendText, isSending } =
 		useText();
+	const { characters } = useCharacter();
 	const disabled: boolean = selectedContent !== 'character' || isSending;
+	const currentCharacter = findCharacterByUUID({
+		array: characters,
+		uuid: selectedCharacterUuid || '',
+	});
 
 	return (
 		<>
@@ -19,10 +25,14 @@ export const MainFooterInputBar = () => {
 				disabled={disabled}
 				size="small"
 				multiline
+				fullWidth
 				maxRows={6}
-				placeholder="AIキャラクターにメッセージを送信する"
+				placeholder={
+					currentCharacter
+						? `${currentCharacter.name}にメッセージを送信する`
+						: 'キャラクターを選択してメッセージを送信する'
+				}
 				sx={{
-					width: '90%',
 					'& .MuiOutlinedInput-root': {
 						backgroundColor: palette.layout.mainLayout.footer.inputBar,
 						borderRadius: '30px',
