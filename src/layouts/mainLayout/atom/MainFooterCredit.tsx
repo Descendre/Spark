@@ -17,18 +17,19 @@ export const MainFooterCredit = () => {
 			display="flex"
 			justifyContent="center"
 			alignItems="center"
-			width="100%"
+			width="90%"
 			height="30px"
 			maxWidth="1000px"
+			margin="0 auto"
 		>
 			<Typography
 				variant="body2"
 				color={palette.text.disabled}
-				width="90%"
-				margin="0 auto"
+				width="100%"
 				textAlign="end"
 			>
-				{currentCharacter ? `credit VOICEVOX:${currentCharacter?.name}` : ' '}
+				{`Material UI (MUI) ` +
+					(currentCharacter ? `VOICEVOX:${currentCharacter?.name}` : '')}
 			</Typography>
 		</Box>
 	);
