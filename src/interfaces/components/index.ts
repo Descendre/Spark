@@ -1,2 +1,2 @@
-export * from './Character';
 export * from './common';
+export * from './log';

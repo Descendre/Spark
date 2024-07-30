@@ -34,7 +34,14 @@ export const MainFooterInputBar = () => {
 			<TextField
 				value={uuid ? text[uuid] : ''}
 				onChange={(event) => handleSetText({ event: event, uuid: uuid || '' })}
-				onKeyDown={(event) => handleKeyDown({ event: event, uuid: uuid || '' })}
+				onKeyDown={(event) =>
+					handleKeyDown({
+						event: event,
+						uuid: uuid || '',
+						chatRoomId:
+							typeof chatRoomUUID === 'string' ? chatRoomUUID : undefined,
+					})
+				}
 				disabled={disabled}
 				size="small"
 				multiline
@@ -85,19 +92,28 @@ export const MainFooterInputBar = () => {
 									<Send
 										sx={{
 											color:
-												!uuid || disabled || text[uuid].length === 0
+												!uuid || disabled || text[uuid]?.length === 0
 													? palette.text.disabled
 													: palette.text.primary,
 											userSelect:
-												!uuid || disabled || text[uuid].length === 0
+												!uuid || disabled || text[uuid]?.length === 0
 													? 'none'
 													: 'auto',
 											cursor:
-												!uuid || disabled || text[uuid].length === 0
+												!uuid || disabled || text[uuid]?.length === 0
 													? 'auto'
 													: 'pointer',
 										}}
-										onClick={() => handeSendText({ uuid: uuid || '' })}
+										onClick={() =>
+											handeSendText({
+												uuid: uuid || '',
+												content: text[uuid || ''],
+												chatRoomId:
+													typeof chatRoomUUID === 'string'
+														? chatRoomUUID
+														: undefined,
+											})
+										}
 									/>
 								)}
 							</Tooltip>

@@ -2,6 +2,7 @@
 import {
 	characterStyleProps,
 	ChatRoomsResponse,
+	ChatsResponse,
 	ContextProviderProps,
 	SelectedContentProps,
 	VoicevoxCharacterDetailResponse,
@@ -30,6 +31,7 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 		{}
 	);
 	const [isSending, setIsSending] = useState<boolean>(false);
+	const [chat, setChat] = useState<{ [uuid: string]: ChatsResponse }>({});
 
 	const contextValue = {
 		characters,
@@ -54,6 +56,8 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 		setStyle,
 		isSending,
 		setIsSending,
+		chat,
+		setChat,
 	};
 
 	return <Context.Provider value={contextValue}>{children}</Context.Provider>;

@@ -9,8 +9,6 @@ import {
 	ListItemText,
 	Skeleton,
 } from '@mui/material';
-import { useParams } from 'next/navigation';
-import { useEffect } from 'react';
 
 export const MainLeftBarListItemLog = ({
 	roomId,
@@ -25,14 +23,7 @@ export const MainLeftBarListItemLog = ({
 		array: characters,
 		uuid: speakerUuid,
 	});
-	const { chatRoomUUID } = useParams();
 	const isSelected: boolean = selectedItem === roomId;
-
-	useEffect(() => {
-		if (chatRoomUUID && typeof chatRoomUUID === 'string') {
-			setSelectedItem(chatRoomUUID);
-		}
-	}, []);
 
 	return (
 		<>

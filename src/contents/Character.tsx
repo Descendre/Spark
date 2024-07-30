@@ -1,5 +1,5 @@
 'use client';
-import { CharacterChatArea, CommonStyleHeader } from '@/components';
+import { CommonStyleHeader } from '@/components';
 import { useLayout } from '@/hooks';
 import { Box } from '@mui/material';
 import React from 'react';
@@ -16,9 +16,7 @@ export const Character = () => {
 				alignItems="start"
 				width="100%"
 				height="100%"
-			>
-				<CharacterChatArea />
-			</Box>
+			></Box>
 		</>
 	);
 };
