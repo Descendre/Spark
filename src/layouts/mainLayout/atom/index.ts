@@ -6,3 +6,4 @@ export * from './MainLeftBarSelection';
 export * from './MainHeaderCommandsLeft';
 export * from './MainHeaderCommandsRight';
 export * from './MainLeftDrawerSelection';
+export * from './MainFooterCredit';

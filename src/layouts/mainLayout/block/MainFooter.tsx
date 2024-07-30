@@ -1,7 +1,7 @@
 'use client';
 import { Box } from '@mui/material';
 import { useBreakPoint, useLayout } from '@/hooks';
-import { MainFooterInputBar } from '../atom';
+import { MainFooterCredit, MainFooterInputBar } from '../atom';
 
 export const MainFooter = () => {
 	const { isLeftBar } = useLayout();
@@ -17,6 +17,7 @@ export const MainFooter = () => {
 			display="flex"
 			justifyContent="center"
 			alignItems="center"
+			flexDirection="column"
 			width={isLeftBarOpen ? 'calc(100% - 350px)' : '100%'}
 			height="100px"
 		>
@@ -25,12 +26,12 @@ export const MainFooter = () => {
 				justifyContent="center"
 				alignItems="end"
 				width="100%"
-				height="100%"
+				height="70px"
 				maxWidth="1000px"
-				marginBottom="40px"
 			>
 				<MainFooterInputBar />
 			</Box>
+			<MainFooterCredit />
 		</Box>
 	);
 };
