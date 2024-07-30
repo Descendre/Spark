@@ -28,7 +28,7 @@ export const MainFooterCredit = () => {
 				width="100%"
 				textAlign="end"
 			>
-				{`Material UI (MUI) ` +
+				{`Material UI (MUI)　` +
 					(currentCharacter ? `VOICEVOX:${currentCharacter?.name}` : '')}
 			</Typography>
 		</Box>

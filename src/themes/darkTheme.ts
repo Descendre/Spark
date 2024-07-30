@@ -40,6 +40,13 @@ export const darkTheme = createTheme({
 				},
 			},
 		},
+		content: {
+			character: {
+				userChatBox: {
+					bg: '#283848',
+				},
+			},
+		},
 		background: {
 			default: '#0d1318',
 		},
