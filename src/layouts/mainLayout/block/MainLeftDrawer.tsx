@@ -63,7 +63,7 @@ export const MainLeftDrawer = () => {
 										key={chatRoom.id}
 										roomId={chatRoom.id}
 										roomName={chatRoom.roomName}
-										speakerUuid={chatRoom.characterID}
+										speakerUuid={chatRoom.speakerUuid}
 										createdAt={chatRoom.createdAt}
 									/>
 								))

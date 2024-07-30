@@ -1,27 +1,40 @@
 'use client';
-import { useCharacter, useLayout, usePalette, useChat } from '@/hooks';
+import { useCharacter, useChat, useLayout, usePalette } from '@/hooks';
 import { findCharacterByUUID } from '@/utils';
 import { HourglassTop, Send } from '@mui/icons-material';
 import { InputAdornment, TextField, Tooltip } from '@mui/material';
+import { useParams } from 'next/navigation';
 
 export const MainFooterInputBar = () => {
 	const palette = usePalette();
-	const { selectedContent, selectedCharacterUuid } = useLayout();
+	const { chatRoomUUID } = useParams();
+	const { selectedContent, selectedItem } = useLayout();
+	const { handleGetSpeakerUuidBySelectedItem } = useChat();
 	const { text, handleSetText, handleKeyDown, handeSendText, isSending } =
 		useChat();
 	const { characters } = useCharacter();
-	const disabled: boolean = selectedContent !== 'character' || isSending;
+	const disabled: boolean =
+		selectedContent === 'noSelected' ||
+		isSending ||
+		(typeof chatRoomUUID === 'string' && !(chatRoomUUID in text));
 	const currentCharacter = findCharacterByUUID({
 		array: characters,
-		uuid: selectedCharacterUuid || '',
+		uuid: selectedItem || '',
 	});
+	const speakerUuid: string | undefined = handleGetSpeakerUuidBySelectedItem();
+	const uuid =
+		selectedContent === 'character'
+			? selectedItem
+			: selectedContent === 'log'
+				? speakerUuid
+				: undefined;
 
 	return (
 		<>
 			<TextField
-				value={selectedCharacterUuid ? text[selectedCharacterUuid] : ''}
-				onChange={(event) => handleSetText({ event: event })}
-				onKeyDown={(event) => handleKeyDown({ event: event })}
+				value={uuid ? text[uuid] : ''}
+				onChange={(event) => handleSetText({ event: event, uuid: uuid || '' })}
+				onKeyDown={(event) => handleKeyDown({ event: event, uuid: uuid || '' })}
 				disabled={disabled}
 				size="small"
 				multiline
@@ -72,25 +85,19 @@ export const MainFooterInputBar = () => {
 									<Send
 										sx={{
 											color:
-												!selectedCharacterUuid ||
-												disabled ||
-												text[selectedCharacterUuid].length === 0
+												!uuid || disabled || text[uuid].length === 0
 													? palette.text.disabled
 													: palette.text.primary,
 											userSelect:
-												!selectedCharacterUuid ||
-												disabled ||
-												text[selectedCharacterUuid].length === 0
+												!uuid || disabled || text[uuid].length === 0
 													? 'none'
 													: 'auto',
 											cursor:
-												!selectedCharacterUuid ||
-												disabled ||
-												text[selectedCharacterUuid].length === 0
+												!uuid || disabled || text[uuid].length === 0
 													? 'auto'
 													: 'pointer',
 										}}
-										onClick={handeSendText}
+										onClick={() => handeSendText({ uuid: uuid || '' })}
 									/>
 								)}
 							</Tooltip>

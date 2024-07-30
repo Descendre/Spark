@@ -27,4 +27,5 @@ export interface HandleGetCharacterDetailProps {
 
 export interface HandleSetCharacterStyleProps {
 	index: number;
+	speakerUuid: string | undefined;
 }

@@ -8,12 +8,12 @@ export const CharacterAIChatBox = ({
 	text,
 	styleName,
 }: CharacterAIChatBoxProps) => {
-	const { selectedCharacterUuid } = useLayout();
+	const { selectedItem } = useLayout();
 	const { characters, characterDetails, style } = useCharacter();
 	const palette = usePalette();
 	const currentCharacter = findCharacterByUUID({
 		array: characters,
-		uuid: selectedCharacterUuid || '',
+		uuid: selectedItem || '',
 	});
 
 	return (
@@ -34,8 +34,8 @@ export const CharacterAIChatBox = ({
 			>
 				<Avatar
 					src={
-						selectedCharacterUuid
-							? characterDetails[selectedCharacterUuid].style_infos[0].icon
+						selectedItem
+							? characterDetails[selectedItem].style_infos[0].icon
 							: ''
 					}
 					sx={{

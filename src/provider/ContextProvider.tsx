@@ -21,9 +21,7 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 	}>({});
 	const [selectedContent, setSelectedContent] =
 		useState<SelectedContentProps>('noSelected');
-	const [selectedCharacterUuid, setSelectedCharacterUuid] = useState<
-		string | null
-	>(null);
+	const [selectedItem, setSelectedItem] = useState<string | null>(null);
 	const [isLeftBar, setIsLeftBar] = useState<boolean>(true);
 	const [isLeftDrawer, setIsLeftDrawer] = useState<boolean>(false);
 	const [isLogSelect, setIsLogSelect] = useState<boolean>(false);
@@ -42,8 +40,8 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 		setCharacterDetails,
 		selectedContent,
 		setSelectedContent,
-		selectedCharacterUuid,
-		setSelectedCharacterUuid,
+		selectedItem,
+		setSelectedItem,
 		isLeftBar,
 		setIsLeftBar,
 		isLeftDrawer,

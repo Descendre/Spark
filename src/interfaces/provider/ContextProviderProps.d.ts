@@ -19,8 +19,8 @@ export interface ContextProviderProps {
 	setSelectedContent: React.Dispatch<
 		React.SetStateAction<SelectedContentProps>
 	>;
-	selectedCharacterUuid: string | null;
-	setSelectedCharacterUuid: React.Dispatch<React.SetStateAction<string | null>>;
+	selectedItem: string | null;
+	setSelectedItem: React.Dispatch<React.SetStateAction<string | null>>;
 	isLeftBar: boolean;
 	setIsLeftBar: React.Dispatch<React.SetStateAction<boolean>>;
 	isLeftDrawer: boolean;
@@ -37,7 +37,7 @@ export interface ContextProviderProps {
 	setIsSending: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export type SelectedContentProps = 'noSelected' | 'character';
+export type SelectedContentProps = 'noSelected' | 'character' | 'log';
 
 export interface characterStyleProps {
 	name: string;

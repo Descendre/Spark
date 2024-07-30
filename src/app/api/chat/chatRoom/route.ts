@@ -14,11 +14,11 @@ export const GET = async (): Promise<NextResponse> => {
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
 	try {
 		const body = await req.json();
-		const { roomName, characterID } = body;
+		const { roomName, speakerUuid } = body;
 		const newChatRoom: ChatNewRoomResponse = await prisma.chatRoom.create({
 			data: {
 				roomName: roomName,
-				characterID: characterID,
+				speakerUuid: speakerUuid,
 			},
 		});
 		return NextResponse.json(newChatRoom);
