@@ -16,6 +16,7 @@ export const CharacterUserChatBox = ({ text }: CharacterUserChatBoxProps) => {
 				bgcolor={palette.content.character.userChatBox.bg}
 				sx={{
 					wordBreak: 'break-all',
+					zIndex: 50,
 				}}
 			>
 				{text}

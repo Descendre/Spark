@@ -10,7 +10,7 @@ export const MainHeaderLogo = () => {
 			height="100%"
 		>
 			<Avatar
-				src={'Spark_logo_transparent.svg'}
+				src={'/Spark_logo_transparent.svg'}
 				variant="square"
 				sx={{
 					width: 'auto',

@@ -38,6 +38,9 @@ export const CharacterAIChatBox = ({
 							? characterDetails[selectedCharacterUuid].style_infos[0].icon
 							: ''
 					}
+					sx={{
+						zindex: 50,
+					}}
 				/>
 				<Typography variant="body2" color={palette.text.disabled}>
 					{`${currentCharacter?.name} (${styleName})`}

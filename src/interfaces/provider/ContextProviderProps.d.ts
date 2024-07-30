@@ -1,4 +1,5 @@
 import {
+	ChatRoomsResponse,
 	VoicevoxCharacterDetailResponse,
 	VoicevoxSpeakersResponse,
 } from '../api';
@@ -8,6 +9,8 @@ export interface ContextProviderProps {
 	setCharacters: React.Dispatch<
 		React.SetStateAction<VoicevoxSpeakersResponse | null>
 	>;
+	chatRooms: ChatRoomsResponse | null;
+	setChatRooms: React.Dispatch<React.SetStateAction<ChatRoomsResponse | null>>;
 	characterDetails: { [uuid: string]: VoicevoxCharacterDetailResponse };
 	setCharacterDetails: React.Dispatch<
 		React.SetStateAction<{ [uuid: string]: VoicevoxCharacterDetailResponse }>

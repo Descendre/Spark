@@ -8,3 +8,10 @@ export interface LeftBarListItemProps {
 	index: number;
 	uuid: string;
 }
+
+export interface LeftBarListItemLogProps {
+	roomId: string;
+	roomName: string;
+	speakerUuid: string;
+	createdAt: Date;
+}

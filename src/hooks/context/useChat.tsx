@@ -2,14 +2,16 @@
 import {
 	HandleKeyDownProps,
 	HandleSetTextProps,
-	UseTextProps,
+	UseChatProps,
+	ChatRoomsResponse,
+	HandleCreateChatRoomProps,
 	VoicevoxAudioQueryResponse,
 } from '@/interfaces';
 import { axiosFetch } from '@/libs';
 import { Context } from '@/provider';
 import { useContext } from 'react';
 
-export const useText = (): UseTextProps => {
+export const useChat = (): UseChatProps => {
 	const context = useContext(Context);
 	if (!context) {
 		throw new Error('Context is not provided');
@@ -22,7 +24,28 @@ export const useText = (): UseTextProps => {
 		style,
 		isSending,
 		setIsSending,
+		chatRooms,
+		setChatRooms,
 	} = context;
+
+	const handleGetChatRooms = async (): Promise<void> => {
+		const response =
+			await axiosFetch.get<ChatRoomsResponse>('/api/chat/chatRoom');
+		setChatRooms(response);
+	};
+
+	const handleCreateChatRoom = async ({
+		roomName,
+		characterID,
+	}: HandleCreateChatRoomProps): Promise<void> => {
+		const response = await axiosFetch.post<ChatRoomsResponse>(
+			'/api/chat/chatRoom',
+			{
+				roomName: roomName,
+				characterID: characterID,
+			}
+		);
+	};
 
 	const handleSetText = ({ event }: HandleSetTextProps): void => {
 		if (!selectedCharacterUuid) return;
@@ -81,10 +104,14 @@ export const useText = (): UseTextProps => {
 	return {
 		text,
 		setText,
+		isSending,
+		setIsSending,
+		chatRooms,
+		setChatRooms,
+		handleGetChatRooms,
+		handleCreateChatRoom,
 		handleSetText,
 		handleKeyDown,
 		handeSendText,
-		isSending,
-		setIsSending,
 	};
 };
