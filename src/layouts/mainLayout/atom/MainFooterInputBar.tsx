@@ -25,6 +25,7 @@ export const MainFooterInputBar = () => {
 				disabled={disabled}
 				size="small"
 				multiline
+				fullWidth
 				maxRows={6}
 				placeholder={
 					currentCharacter
@@ -32,7 +33,6 @@ export const MainFooterInputBar = () => {
 						: 'キャラクターを選択してメッセージを送信する'
 				}
 				sx={{
-					width: '90%',
 					'& .MuiOutlinedInput-root': {
 						backgroundColor: palette.layout.mainLayout.footer.inputBar,
 						borderRadius: '30px',

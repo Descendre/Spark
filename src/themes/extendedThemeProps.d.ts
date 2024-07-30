@@ -33,6 +33,13 @@ declare module '@mui/material/styles' {
 				};
 			};
 		};
+		content: {
+			character: {
+				userChatBox: {
+					bg: string;
+				};
+			};
+		};
 	}
 	interface PaletteOptions {
 		layout: {
@@ -63,6 +70,13 @@ declare module '@mui/material/styles' {
 				hoverCharacterBg: {
 					primary: string;
 					secondary: string;
+				};
+			};
+		};
+		content: {
+			character: {
+				userChatBox: {
+					bg: string;
 				};
 			};
 		};

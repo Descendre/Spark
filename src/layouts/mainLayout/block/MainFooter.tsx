@@ -25,9 +25,10 @@ export const MainFooter = () => {
 				display="flex"
 				justifyContent="center"
 				alignItems="end"
-				width="100%"
+				width="90%"
 				height="70px"
 				maxWidth="1000px"
+				margin="0 auto"
 			>
 				<MainFooterInputBar />
 			</Box>

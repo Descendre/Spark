@@ -1,7 +1,7 @@
 'use client';
 import { useCharacter, useLayout } from '@/hooks';
 import { CharacterStyleHeaderChipProps } from '@/interfaces';
-import { Check, RadioButtonUnchecked } from '@mui/icons-material';
+import { RadioButtonChecked, RadioButtonUnchecked } from '@mui/icons-material';
 import { Avatar, Chip } from '@mui/material';
 import React from 'react';
 
@@ -21,7 +21,9 @@ export const CharacterStyleHeaderChip = ({
 			color={isSelected ? 'primary' : 'default'}
 			avatar={<Avatar src={url} />}
 			label={label}
-			deleteIcon={isSelected ? <Check /> : <RadioButtonUnchecked />}
+			deleteIcon={
+				isSelected ? <RadioButtonChecked /> : <RadioButtonUnchecked />
+			}
 			onDelete={() => {}}
 			onClick={() => handleSetCharacterStyle({ index: index })}
 			sx={{
