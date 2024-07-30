@@ -3,7 +3,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { darkTheme } from '@/themes';
 import { MainLayout } from '@/layouts';
-import { ContextProvider } from '@/provider/ContextProvider';
+import { ContextProvider } from '@/provider';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -16,7 +16,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="jp">
 			<ThemeProvider theme={darkTheme}>
 				<body>
 					<ContextProvider>

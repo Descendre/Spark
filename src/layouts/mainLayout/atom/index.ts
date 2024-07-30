@@ -7,3 +7,4 @@ export * from './MainHeaderCommandsLeft';
 export * from './MainHeaderCommandsRight';
 export * from './MainLeftDrawerSelection';
 export * from './MainFooterCredit';
+export * from './MainLeftBarListItemLog';

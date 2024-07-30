@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { axiosFetch } from '../../../../../libs';
+import { axiosFetch } from '@/libs';
 import fs from 'fs';
 import path from 'path';
 

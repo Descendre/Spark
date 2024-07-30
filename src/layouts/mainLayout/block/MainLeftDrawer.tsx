@@ -1,8 +1,15 @@
 'use client';
-import { useBreakPoint, useCharacter, useLayout, usePalette } from '@/hooks';
+import {
+	useBreakPoint,
+	useCharacter,
+	useChat,
+	useLayout,
+	usePalette,
+} from '@/hooks';
 import { Box, Drawer, List } from '@mui/material';
 import {
 	MainLeftBarListItem,
+	MainLeftBarListItemLog,
 	MainLeftBarListSkeleton,
 	MainLeftDrawerSelection,
 } from '../atom';
@@ -11,6 +18,7 @@ import { useEffect } from 'react';
 export const MainLeftDrawer = () => {
 	const breakpoint = useBreakPoint();
 	const palette = usePalette();
+	const { chatRooms } = useChat();
 	const { characters } = useCharacter();
 	const { isLeftDrawer, setIsLeftDrawer, isLogSelect } = useLayout();
 
@@ -48,21 +56,31 @@ export const MainLeftDrawer = () => {
 						},
 					}}
 				>
-					{isLogSelect ? (
-						<Box />
-					) : characters ? (
-						characters.map((character, index) => (
-							<MainLeftBarListItem
-								key={character.speaker_uuid}
-								index={index}
-								uuid={character.speaker_uuid}
-							/>
-						))
-					) : (
-						Array.from({ length: 30 }, (_, index) => (
-							<MainLeftBarListSkeleton key={index} />
-						))
-					)}
+					{isLogSelect
+						? chatRooms
+							? chatRooms.map((chatRoom) => (
+									<MainLeftBarListItemLog
+										key={chatRoom.id}
+										roomId={chatRoom.id}
+										roomName={chatRoom.roomName}
+										speakerUuid={chatRoom.characterID}
+										createdAt={chatRoom.createdAt}
+									/>
+								))
+							: Array.from({ length: 30 }, (_, index) => (
+									<MainLeftBarListSkeleton key={index} />
+								))
+						: characters
+							? characters.map((character, index) => (
+									<MainLeftBarListItem
+										key={character.speaker_uuid}
+										index={index}
+										uuid={character.speaker_uuid}
+									/>
+								))
+							: Array.from({ length: 30 }, (_, index) => (
+									<MainLeftBarListSkeleton key={index} />
+								))}
 				</List>
 			</Box>
 		</Drawer>

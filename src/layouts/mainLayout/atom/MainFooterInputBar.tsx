@@ -1,5 +1,5 @@
 'use client';
-import { useCharacter, useLayout, usePalette, useText } from '@/hooks';
+import { useCharacter, useLayout, usePalette, useChat } from '@/hooks';
 import { findCharacterByUUID } from '@/utils';
 import { HourglassTop, Send } from '@mui/icons-material';
 import { InputAdornment, TextField, Tooltip } from '@mui/material';
@@ -8,7 +8,7 @@ export const MainFooterInputBar = () => {
 	const palette = usePalette();
 	const { selectedContent, selectedCharacterUuid } = useLayout();
 	const { text, handleSetText, handleKeyDown, handeSendText, isSending } =
-		useText();
+		useChat();
 	const { characters } = useCharacter();
 	const disabled: boolean = selectedContent !== 'character' || isSending;
 	const currentCharacter = findCharacterByUUID({

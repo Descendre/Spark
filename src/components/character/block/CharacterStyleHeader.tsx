@@ -17,6 +17,7 @@ export const CharacterStyleHeader = () => {
 
 	return (
 		<Box
+			zIndex={100}
 			position="fixed"
 			left={isLeftBarOpen ? '350px' : 0}
 			display="flex"

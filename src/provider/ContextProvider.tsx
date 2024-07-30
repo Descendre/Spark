@@ -1,6 +1,7 @@
 'use client';
 import {
 	characterStyleProps,
+	ChatRoomsResponse,
 	ContextProviderProps,
 	SelectedContentProps,
 	VoicevoxCharacterDetailResponse,
@@ -14,6 +15,7 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 	const [characters, setCharacters] = useState<VoicevoxSpeakersResponse | null>(
 		null
 	);
+	const [chatRooms, setChatRooms] = useState<ChatRoomsResponse | null>(null);
 	const [characterDetails, setCharacterDetails] = useState<{
 		[uuid: string]: VoicevoxCharacterDetailResponse;
 	}>({});
@@ -34,6 +36,8 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 	const contextValue = {
 		characters,
 		setCharacters,
+		chatRooms,
+		setChatRooms,
 		characterDetails,
 		setCharacterDetails,
 		selectedContent,

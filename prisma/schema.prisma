@@ -27,7 +27,7 @@ model Chat{
   context String
   chatRoom ChatRoom @relation(fields: [chatRoomId], references: [id])
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @updatedAt @default(now())
 }
 
 model ChatRoom{
@@ -35,5 +35,6 @@ model ChatRoom{
   roomName  String
   characterID String
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
   chat Chat[]
 }
