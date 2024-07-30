@@ -8,18 +8,20 @@ export const LogUserChatBox = ({ text }: LogUserChatBoxProps) => {
 
 	return (
 		<Box display="flex" justifyContent="end" alignItems="center" width="100%">
-			<Typography
-				maxWidth="70%"
-				padding="10px 25px"
-				borderRadius="20px"
-				bgcolor={palette.content.character.userChatBox.bg}
-				sx={{
-					wordBreak: 'break-all',
-					whiteSpace: 'pre-wrap',
-				}}
-			>
-				{text}
-			</Typography>
+			{text && (
+				<Typography
+					maxWidth="70%"
+					padding="10px 25px"
+					borderRadius="20px"
+					bgcolor={palette.content.character.userChatBox.bg}
+					sx={{
+						wordBreak: 'break-all',
+						whiteSpace: 'pre-wrap',
+					}}
+				>
+					{text}
+				</Typography>
+			)}
 		</Box>
 	);
 };

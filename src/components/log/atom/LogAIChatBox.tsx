@@ -51,7 +51,6 @@ export const LogAIChatBox = ({
 			</Box>
 			<Typography
 				width="calc(100% - 25px)"
-				height="100px"
 				marginLeft="auto"
 				padding="10px 15px"
 				sx={{
