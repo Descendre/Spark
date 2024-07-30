@@ -1,15 +1,19 @@
 'use client';
-import { useChat, useCharacter } from '@/hooks';
+import { useCharacter, useChat } from '@/hooks';
 import { MainView } from '@/views';
 import { useEffect } from 'react';
 
 export default function Home() {
-	const { handleGetChatRooms } = useChat();
-	const { handleGetCharacters } = useCharacter();
+	const { chatRooms, handleGetChatRooms } = useChat();
+	const { characters, handleGetCharacters } = useCharacter();
 
 	useEffect(() => {
-		handleGetCharacters();
-		handleGetChatRooms();
+		if (!characters) {
+			handleGetCharacters();
+		}
+		if (!chatRooms) {
+			handleGetChatRooms();
+		}
 	}, []);
 
 	return (

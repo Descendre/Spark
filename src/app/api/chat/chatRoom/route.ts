@@ -1,12 +1,15 @@
-import { ChatRoomsResponse, ChatNewRoomResponse } from '@/interfaces';
-import { NextRequest, NextResponse } from 'next/server';
+import { ChatNewRoomResponse, ChatRoomsResponse } from '@/interfaces';
 import { prisma } from '@/libs';
+import { NextRequest, NextResponse } from 'next/server';
 
 export const GET = async (): Promise<NextResponse> => {
 	try {
-		const allChatRoom: ChatRoomsResponse = await prisma.chatRoom.findMany();
-		return NextResponse.json(allChatRoom);
+		const allChatRooms: ChatRoomsResponse = await prisma.chatRoom.findMany({
+			orderBy: { createdAt: 'desc' },
+		});
+		return NextResponse.json(allChatRooms);
 	} catch (error) {
+		console.error('Error fetching ChatRoom:', error);
 		return NextResponse.json(error);
 	}
 };
@@ -23,6 +26,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 		});
 		return NextResponse.json(newChatRoom);
 	} catch (error) {
+		console.error('Error creating ChatRoom:', error);
 		return NextResponse.json(error);
 	}
 };

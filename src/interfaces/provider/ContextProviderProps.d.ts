@@ -35,6 +35,10 @@ export interface ContextProviderProps {
 	>;
 	isSending: boolean;
 	setIsSending: React.Dispatch<React.SetStateAction<boolean>>;
+	chat: { [uuid: string]: ChatsResponse };
+	setChat: React.Dispatch<
+		React.SetStateAction<{ [uuid: string]: ChatsResponse }>
+	>;
 }
 
 export type SelectedContentProps = 'noSelected' | 'character' | 'log';

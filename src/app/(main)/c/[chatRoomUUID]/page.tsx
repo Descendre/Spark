@@ -5,21 +5,25 @@ import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function Home() {
-	const { handleGetChatRooms } = useChat();
-	const { handleGetCharacters } = useCharacter();
+	const { chatRooms, handleGetChatRooms } = useChat();
+	const { characters, handleGetCharacters } = useCharacter();
 	const { chatRoomUUID } = useParams();
-	const { setIsLogSelect, setSelectedContent } = useLayout();
+	const { setIsLogSelect, setSelectedContent, setSelectedItem } = useLayout();
 
 	useEffect(() => {
 		if (chatRoomUUID) {
-			setIsLogSelect(true);
 			setSelectedContent('log');
+			setIsLogSelect(true);
 		}
-	}, []);
-
-	useEffect(() => {
-		handleGetCharacters();
-		handleGetChatRooms();
+		if (chatRoomUUID && typeof chatRoomUUID === 'string') {
+			setSelectedItem(chatRoomUUID);
+		}
+		if (!characters) {
+			handleGetCharacters();
+		}
+		if (!chatRooms) {
+			handleGetChatRooms();
+		}
 	}, []);
 
 	return (
