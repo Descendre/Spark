@@ -1,15 +1,23 @@
 'use client';
-import { useCharacter, useLayout, usePalette } from '@/hooks';
+import { useCharacter, useChat, useLayout, usePalette } from '@/hooks';
 import { findCharacterByUUID } from '@/utils';
 import { Box, Typography } from '@mui/material';
 
 export const MainFooterCredit = () => {
 	const palette = usePalette();
-	const { selectedItem } = useLayout();
+	const { handleGetSpeakerUuidBySelectedItem } = useChat();
+	const { selectedContent, selectedItem } = useLayout();
 	const { characters } = useCharacter();
+	const speakerUuid: string | undefined = handleGetSpeakerUuidBySelectedItem();
+	const uuid =
+		selectedContent === 'character'
+			? selectedItem
+			: selectedContent === 'log'
+				? speakerUuid
+				: undefined;
 	const currentCharacter = findCharacterByUUID({
 		array: characters,
-		uuid: selectedItem || '',
+		uuid: uuid || '',
 	});
 
 	return (

@@ -7,9 +7,11 @@ import {
 import { Context } from '@/provider';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
+import { useBreakPoint } from '../common';
 
 export const useLayout = (): UseLayoutProps => {
 	const router = useRouter();
+	const breakpoint = useBreakPoint();
 	const context = useContext(Context);
 	if (!context) {
 		throw new Error('Context is not provided');
@@ -38,6 +40,9 @@ export const useLayout = (): UseLayoutProps => {
 			setSelectedItem(uuid);
 			setSelectedContent('character');
 			router.push('/');
+			if (['xs', 'sm'].includes(breakpoint)) {
+				setIsLeftDrawer(false);
+			}
 		}
 	};
 
@@ -49,6 +54,9 @@ export const useLayout = (): UseLayoutProps => {
 			setSelectedItem(chatRoomId);
 			setSelectedContent('log');
 			router.push(`/c/${chatRoomId}`);
+			if (['xs', 'sm'].includes(breakpoint)) {
+				setIsLeftDrawer(false);
+			}
 		}
 	};
 
