@@ -3,7 +3,7 @@ import {
 	ChatNewRoomResponse,
 	ChatRoomsResponse,
 	ChatsResponse,
-	HandeSendTextProps,
+	HandleSendTextProps,
 	HandleAddAIChatProps,
 	HandleAddUserChatProps,
 	HandleCreateChatRoomProps,
@@ -142,12 +142,13 @@ export const useChat = (): UseChatProps => {
 
 	const handlePlayVoice = async ({
 		uuid,
+		content,
 	}: HandlePlayVoiceProps): Promise<void> => {
 		const audioQueryResponse =
 			await axiosFetch.post<VoicevoxAudioQueryResponse>(
 				`/api/voicevox/audio/audioQuery`,
 				{
-					text: text[uuid],
+					text: content,
 					speaker: style[uuid].id,
 				}
 			);
@@ -179,16 +180,21 @@ export const useChat = (): UseChatProps => {
 			event.preventDefault();
 			const target = event.target as HTMLTextAreaElement;
 			const value = target.value;
-			handeSendText({ content: value, chatRoomId: chatRoomId, uuid: uuid });
+			handleSendText({ content: value, chatRoomId: chatRoomId, uuid: uuid });
 		}
 	};
 
-	const handeSendText = async ({
+	const handleSendText = async ({
 		uuid,
 		content,
 		chatRoomId,
-	}: HandeSendTextProps): Promise<void> => {
-		if (isSending || !uuid || text[uuid].length === 0) return;
+	}: HandleSendTextProps): Promise<void> => {
+		if (
+			isSending ||
+			!uuid ||
+			(selectedContent === 'character' && text[uuid].length === 0)
+		)
+			return;
 		setIsSending(true);
 		setText((prevText) => ({
 			...prevText,
@@ -213,7 +219,7 @@ export const useChat = (): UseChatProps => {
 					speakerUuid: uuid,
 					speakerStyle: style[uuid].id,
 				});
-				await handlePlayVoice({ uuid: uuid });
+				await handlePlayVoice({ content: content, uuid: uuid });
 				await handleGetChats({ chatRoomId: response.id });
 			}, 2000);
 		} else if (selectedContent === 'log') {
@@ -229,7 +235,7 @@ export const useChat = (): UseChatProps => {
 					speakerUuid: uuid,
 					speakerStyle: style[uuid].id,
 				});
-				await handlePlayVoice({ uuid: uuid });
+				await handlePlayVoice({ content: content, uuid: uuid });
 				await handleGetChats({ chatRoomId: chatRoomId });
 			}, 2000);
 		} else if (selectedContent === 'noSelected') {
@@ -243,6 +249,7 @@ export const useChat = (): UseChatProps => {
 		text,
 		setText,
 		isSending,
+		handlePlayVoice,
 		setIsSending,
 		handleGetChatRooms,
 		handleGetChats,
@@ -253,7 +260,7 @@ export const useChat = (): UseChatProps => {
 		handleSetText,
 		handleSetChat,
 		handleKeyDown,
-		handeSendText,
+		handleSendText,
 		chat,
 		setChat,
 	};

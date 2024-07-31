@@ -1,5 +1,5 @@
 'use client';
-import { UseCallProps } from '@/interfaces';
+import { HandleTranscriptSendProps, UseCallProps } from '@/interfaces';
 import { Context } from '@/provider';
 import { useContext, useEffect } from 'react';
 import { useChat } from './useChat';
@@ -17,14 +17,29 @@ export const useCall = (): UseCallProps => {
 		browserSupportsSpeechRecognition,
 	} = useSpeechRecognition();
 	const router = useRouter();
-	const { handleCreateChatRoom, handleGetChatRooms } = useChat();
+	const {
+		handleCreateChatRoom,
+		handleGetChatRooms,
+		handleSendText,
+		handleSetChat,
+		handleAddUserChat,
+		handleGetChats,
+		handleAddAIChat,
+		handlePlayVoice,
+	} = useChat();
 
 	const context = useContext(Context);
 	if (!context) {
 		throw new Error('Context is not provided');
 	}
 
-	const { selectedItem, setSelectedContent, setIsLogSelect } = context;
+	const {
+		selectedItem,
+		setSelectedContent,
+		setIsLogSelect,
+		style,
+		setIsSending,
+	} = context;
 
 	useEffect(() => {
 		SpeechRecognition.stopListening();
@@ -37,7 +52,7 @@ export const useCall = (): UseCallProps => {
 			speakerUuid: selectedItem,
 		});
 		await handleGetChatRooms();
-		router.push(`/c/${response.id}`);
+		router.push(`/c/${response.id}?callStart=true`);
 		setSelectedContent('call');
 		setIsLogSelect(true);
 		setTimeout(() => {
@@ -65,6 +80,29 @@ export const useCall = (): UseCallProps => {
 		SpeechRecognition.stopListening();
 	};
 
+	const handleTranscriptSend = async ({
+		uuid,
+		chatRoomId,
+	}: HandleTranscriptSendProps): Promise<void> => {
+		if (transcript.length === 0 || !chatRoomId) return;
+		setIsSending(true);
+		handleSetChat({ chatRoomId: chatRoomId, content: transcript });
+		await handleAddUserChat({ content: transcript, chatRoomId: chatRoomId });
+		await handleGetChats({ chatRoomId: chatRoomId });
+
+		setTimeout(async () => {
+			await handleAddAIChat({
+				content: transcript,
+				chatRoomId: chatRoomId,
+				speakerUuid: uuid,
+				speakerStyle: style[uuid].id,
+			});
+			await handlePlayVoice({ content: transcript, uuid: uuid });
+			await handleGetChats({ chatRoomId: chatRoomId });
+			resetTranscript();
+		}, 2000);
+	};
+
 	return {
 		listening,
 		handleNewCallStart,
@@ -72,5 +110,6 @@ export const useCall = (): UseCallProps => {
 		handleCallEnd,
 		handleCallPlay,
 		handleCallPause,
+		handleTranscriptSend,
 	};
 };
