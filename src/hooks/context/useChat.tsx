@@ -14,6 +14,8 @@ import {
 	HandleSetTextProps,
 	UseChatProps,
 	VoicevoxAudioQueryResponse,
+	ChatGPTResponse,
+	HandleChatGPTProps,
 } from '@/interfaces';
 import { axiosFetch } from '@/libs';
 import { Context } from '@/provider';
@@ -116,6 +118,17 @@ export const useChat = (): UseChatProps => {
 		});
 	};
 
+	const handleChatGPT = async ({
+		messages,
+		model,
+	}: HandleChatGPTProps): Promise<ChatGPTResponse> => {
+		const response = await axiosFetch.post<ChatGPTResponse>(`/api/chatGPT`, {
+			model: model,
+			messages: messages,
+		});
+		return response;
+	};
+
 	const handleGetSpeakerUuidBySelectedItem = (): string | undefined => {
 		if (!chatRooms) return undefined;
 		const index = chatRooms.findIndex((room) => room.id === selectedItem);
@@ -212,32 +225,57 @@ export const useChat = (): UseChatProps => {
 			router.push(`/c/${response.id}`);
 			await handleGetChats({ chatRoomId: response.id });
 
-			setTimeout(async () => {
-				await handleAddAIChat({
+			const messages = [
+				{
+					role: 'user',
 					content: content,
-					chatRoomId: response.id,
-					speakerUuid: uuid,
-					speakerStyle: style[uuid].id,
-				});
-				await handlePlayVoice({ content: content, uuid: uuid });
-				await handleGetChats({ chatRoomId: response.id });
-			}, 2000);
-		} else if (selectedContent === 'log') {
+				},
+			];
+			const chatGPTResponse = await handleChatGPT({
+				model: 'gpt-4o-mini',
+				messages: messages,
+			});
+			console.log(chatGPTResponse);
+
+			await handleAddAIChat({
+				content: chatGPTResponse.choices[0].message.content,
+				chatRoomId: response.id,
+				speakerUuid: uuid,
+				speakerStyle: style[uuid].id,
+			});
+			await handlePlayVoice({
+				content: chatGPTResponse.choices[0].message.content,
+				uuid: uuid,
+			});
+			await handleGetChats({ chatRoomId: response.id });
+		} else if (selectedContent === 'log' || selectedContent === 'call') {
 			if (!chatRoomId) return;
 			handleSetChat({ chatRoomId: chatRoomId, content: content });
 			await handleAddUserChat({ content: content, chatRoomId: chatRoomId });
 			await handleGetChats({ chatRoomId: chatRoomId });
 
-			setTimeout(async () => {
-				await handleAddAIChat({
+			const messages = [
+				{
+					role: 'user',
 					content: content,
-					chatRoomId: chatRoomId,
-					speakerUuid: uuid,
-					speakerStyle: style[uuid].id,
-				});
-				await handlePlayVoice({ content: content, uuid: uuid });
-				await handleGetChats({ chatRoomId: chatRoomId });
-			}, 2000);
+				},
+			];
+			const chatGPTResponse = await handleChatGPT({
+				model: 'gpt-4o-mini',
+				messages: messages,
+			});
+
+			await handleAddAIChat({
+				content: chatGPTResponse.choices[0].message.content,
+				chatRoomId: chatRoomId,
+				speakerUuid: uuid,
+				speakerStyle: style[uuid].id,
+			});
+			await handlePlayVoice({
+				content: chatGPTResponse.choices[0].message.content,
+				uuid: uuid,
+			});
+			await handleGetChats({ chatRoomId: chatRoomId });
 		} else if (selectedContent === 'noSelected') {
 			return;
 		}
@@ -256,6 +294,7 @@ export const useChat = (): UseChatProps => {
 		handleCreateChatRoom,
 		handleAddUserChat,
 		handleAddAIChat,
+		handleChatGPT,
 		handleGetSpeakerUuidBySelectedItem,
 		handleSetText,
 		handleSetChat,
