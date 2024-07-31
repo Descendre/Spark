@@ -12,6 +12,7 @@ export interface UseChatProps {
 	setChat: React.Dispatch<
 		React.SetStateAction<{ [uuid: string]: ChatsResponse }>
 	>;
+	handlePlayVoice: ({ uuid, content }: HandlePlayVoiceProps) => Promise<void>;
 	handleGetChatRooms: () => Promise<void>;
 	handleGetChats: ({ chatRoomId }: HandleGetChatsProps) => Promise<void>;
 	handleCreateChatRoom: ({
@@ -32,7 +33,7 @@ export interface UseChatProps {
 	handleSetText: ({ event }: HandleSetTextProps) => void;
 	handleSetChat: ({ chatRoomId, content }: HandleSetChatProps) => void;
 	handleKeyDown: ({ event, uuid }: HandleKeyDownProps) => void;
-	handeSendText: ({ uuid }: HandeSendTextProps) => void;
+	handleSendText: ({ uuid }: HandleSendTextProps) => Promise<void>;
 }
 
 export interface HandleCreateChatRoomProps {
@@ -68,6 +69,7 @@ export interface HandleSetChatProps {
 
 export interface HandlePlayVoiceProps {
 	uuid: string;
+	content: string;
 }
 
 export interface HandleKeyDownProps {
@@ -76,7 +78,7 @@ export interface HandleKeyDownProps {
 	chatRoomId?: string;
 }
 
-export interface HandeSendTextProps {
+export interface HandleSendTextProps {
 	uuid: string;
 	chatRoomId?: string;
 	content: string;

@@ -10,7 +10,7 @@ export const MainFooterInputBar = () => {
 	const { chatRoomUUID } = useParams() as { chatRoomUUID: string };
 	const { selectedContent, selectedItem } = useLayout();
 	const { handleGetSpeakerUuidBySelectedItem } = useChat();
-	const { text, handleSetText, handleKeyDown, handeSendText, isSending } =
+	const { text, handleSetText, handleKeyDown, handleSendText, isSending } =
 		useChat();
 	const { characters } = useCharacter();
 	const disabled: boolean =
@@ -105,7 +105,7 @@ export const MainFooterInputBar = () => {
 													: 'pointer',
 										}}
 										onClick={() =>
-											handeSendText({
+											handleSendText({
 												uuid: uuid || '',
 												content: text[uuid || ''],
 												chatRoomId:
