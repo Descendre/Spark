@@ -1,5 +1,10 @@
 import { KeyboardEvent } from 'react';
-import { ChatNewRoomResponse, ChatRoomsResponse, ChatsResponse } from '../api';
+import {
+	ChatNewRoomResponse,
+	ChatRoomsResponse,
+	ChatsResponse,
+	ChatGPTResponse,
+} from '../api';
 
 export interface UseChatProps {
 	chatRooms: ChatRoomsResponse | null;
@@ -23,6 +28,10 @@ export interface UseChatProps {
 		content,
 		chatRoomId,
 	}: HandleAddUserChatProps) => Promise<void>;
+	handleChatGPT: ({
+		model,
+		messages,
+	}: HandleChatGPTProps) => Promise<ChatGPTResponse>;
 	handleAddAIChat: ({
 		speakerUuid,
 		speakerStyle,
@@ -55,6 +64,14 @@ export interface HandleAddAIChatProps {
 	content: string;
 	speakerStyle: number;
 	speakerUuid: string;
+}
+
+export interface HandleChatGPTProps {
+	model: string;
+	messages: {
+		role: string;
+		content: string;
+	}[];
 }
 
 export interface HandleSetTextProps {

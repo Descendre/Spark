@@ -85,22 +85,7 @@ export const useCall = (): UseCallProps => {
 		chatRoomId,
 	}: HandleTranscriptSendProps): Promise<void> => {
 		if (transcript.length === 0 || !chatRoomId) return;
-		setIsSending(true);
-		handleSetChat({ chatRoomId: chatRoomId, content: transcript });
-		await handleAddUserChat({ content: transcript, chatRoomId: chatRoomId });
-		await handleGetChats({ chatRoomId: chatRoomId });
-
-		setTimeout(async () => {
-			await handleAddAIChat({
-				content: transcript,
-				chatRoomId: chatRoomId,
-				speakerUuid: uuid,
-				speakerStyle: style[uuid].id,
-			});
-			await handlePlayVoice({ content: transcript, uuid: uuid });
-			await handleGetChats({ chatRoomId: chatRoomId });
-			resetTranscript();
-		}, 2000);
+		handleSendText({ uuid: uuid, content: transcript, chatRoomId: chatRoomId });
 	};
 
 	return {
