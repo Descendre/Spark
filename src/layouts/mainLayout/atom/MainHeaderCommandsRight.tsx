@@ -4,8 +4,8 @@ import { Call, CallEnd } from '@mui/icons-material';
 import { Box, Tooltip } from '@mui/material';
 
 export const MainHeaderCommandsRight = () => {
-	const { selectedContent, setSelectedContent } = useLayout();
-	const { handleCallEnd } = useCall();
+	const { selectedContent } = useLayout();
+	const { handleNewCallStart, handleCallStart, handleCallEnd } = useCall();
 	const palette = usePalette();
 	const iconDisabled: boolean = !['character', 'log', 'call'].includes(
 		selectedContent
@@ -44,7 +44,11 @@ export const MainHeaderCommandsRight = () => {
 						<Call
 							onClick={() => {
 								if (!iconDisabled) {
-									setSelectedContent('call');
+									if (selectedContent === 'character') {
+										handleNewCallStart();
+									} else if (selectedContent === 'log') {
+										handleCallStart();
+									}
 								}
 							}}
 							sx={{

@@ -14,7 +14,6 @@ export interface UseChatProps {
 	>;
 	handleGetChatRooms: () => Promise<void>;
 	handleGetChats: ({ chatRoomId }: HandleGetChatsProps) => Promise<void>;
-	handleFetchChats: ({ chatRoomId }: HandleFetchChatsProps) => Promise<void>;
 	handleCreateChatRoom: ({
 		roomName,
 		speakerUuid,
@@ -42,10 +41,6 @@ export interface HandleCreateChatRoomProps {
 }
 
 export interface HandleGetChatsProps {
-	chatRoomId: string;
-}
-
-export interface HandleFetchChatsProps {
 	chatRoomId: string;
 }
 

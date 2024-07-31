@@ -24,12 +24,15 @@
 		"node-vibrant": "^3.1.6",
 		"prisma": "^5.17.0",
 		"react": "^18",
-		"react-dom": "^18"
+		"react-dom": "^18",
+		"react-speech-recognition": "^3.10.0",
+		"regenerator-runtime": "^0.14.1"
 	},
 	"devDependencies": {
 		"@types/node": "^20",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
+		"@types/react-speech-recognition": "^3.9.5",
 		"@typescript-eslint/eslint-plugin": "^7.17.0",
 		"@typescript-eslint/parser": "^7.17.0",
 		"eslint": "^8.57.0",

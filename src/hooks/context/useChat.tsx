@@ -7,7 +7,6 @@ import {
 	HandleAddAIChatProps,
 	HandleAddUserChatProps,
 	HandleCreateChatRoomProps,
-	HandleFetchChatsProps,
 	HandleGetChatsProps,
 	HandleKeyDownProps,
 	HandlePlayVoiceProps,
@@ -40,6 +39,8 @@ export const useChat = (): UseChatProps => {
 		selectedContent,
 		chat,
 		setChat,
+		setIsLogSelect,
+		setSelectedContent,
 	} = context;
 
 	const handleGetChatRooms = async (): Promise<void> => {
@@ -62,18 +63,15 @@ export const useChat = (): UseChatProps => {
 	const handleGetChats = async ({
 		chatRoomId,
 	}: HandleGetChatsProps): Promise<void> => {
-		await axiosFetch.get<ChatsResponse>(`/api/chat/${chatRoomId}`);
-		if (chat[chatRoomId]) {
-			return;
-		} else {
-			handleFetchChats({ chatRoomId: chatRoomId });
-		}
-	};
-
-	const handleFetchChats = async ({ chatRoomId }: HandleFetchChatsProps) => {
-		const response = await axiosFetch.get<ChatsResponse>(
+		const response = await axiosFetch.get<ChatsResponse | 404>(
 			`/api/chat/${chatRoomId}`
 		);
+		if (response === 404) {
+			router.push('/');
+			setSelectedContent('noSelected');
+			setIsLogSelect(false);
+			return;
+		}
 		setChat((newChat) => ({
 			...newChat,
 			[chatRoomId]: response,
@@ -206,7 +204,7 @@ export const useChat = (): UseChatProps => {
 			handleSetChat({ chatRoomId: response.id, content: content });
 			await handleAddUserChat({ content: content, chatRoomId: response.id });
 			router.push(`/c/${response.id}`);
-			await handleFetchChats({ chatRoomId: response.id });
+			await handleGetChats({ chatRoomId: response.id });
 
 			setTimeout(async () => {
 				await handleAddAIChat({
@@ -216,13 +214,13 @@ export const useChat = (): UseChatProps => {
 					speakerStyle: style[uuid].id,
 				});
 				await handlePlayVoice({ uuid: uuid });
-				await handleFetchChats({ chatRoomId: response.id });
+				await handleGetChats({ chatRoomId: response.id });
 			}, 2000);
 		} else if (selectedContent === 'log') {
 			if (!chatRoomId) return;
 			handleSetChat({ chatRoomId: chatRoomId, content: content });
 			await handleAddUserChat({ content: content, chatRoomId: chatRoomId });
-			await handleFetchChats({ chatRoomId: chatRoomId });
+			await handleGetChats({ chatRoomId: chatRoomId });
 
 			setTimeout(async () => {
 				await handleAddAIChat({
@@ -232,7 +230,7 @@ export const useChat = (): UseChatProps => {
 					speakerStyle: style[uuid].id,
 				});
 				await handlePlayVoice({ uuid: uuid });
-				await handleFetchChats({ chatRoomId: chatRoomId });
+				await handleGetChats({ chatRoomId: chatRoomId });
 			}, 2000);
 		} else if (selectedContent === 'noSelected') {
 			return;
@@ -248,7 +246,6 @@ export const useChat = (): UseChatProps => {
 		setIsSending,
 		handleGetChatRooms,
 		handleGetChats,
-		handleFetchChats,
 		handleCreateChatRoom,
 		handleAddUserChat,
 		handleAddAIChat,
