@@ -14,9 +14,9 @@ export const MainFooterInputBar = () => {
 		useChat();
 	const { characters } = useCharacter();
 	const disabled: boolean =
-		!['character', 'log'].includes(selectedContent) ||
+		selectedContent === 'noSelected' ||
 		isSending ||
-		!(chatRoomUUID in text);
+		(chatRoomUUID ? !(chatRoomUUID in text) : false);
 	const currentCharacter = findCharacterByUUID({
 		array: characters,
 		uuid: selectedItem || '',
