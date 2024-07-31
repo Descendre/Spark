@@ -13,8 +13,6 @@ export const darkTheme = createTheme({
 			mainLayout: {
 				header: {
 					bg: '#0d1318',
-					callStart: '#00BB00',
-					callEnd: '#DD0000',
 					disabled: '#333333',
 				},
 				leftBar: {
@@ -45,6 +43,9 @@ export const darkTheme = createTheme({
 				userChatBox: {
 					bg: '#283848',
 				},
+			},
+			call: {
+				bg: '#000000',
 			},
 		},
 		background: {

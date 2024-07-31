@@ -9,7 +9,7 @@ import {
 import { MenuOpen } from '@mui/icons-material';
 
 export const MainHeader = () => {
-	const { isLeftBar, setIsLeftDrawer } = useLayout();
+	const { isLeftBar, setIsLeftDrawer, selectedContent } = useLayout();
 	const breakpoint = useBreakPoint();
 	const palette = usePalette();
 	const isLeftBarOpen: boolean =
@@ -18,6 +18,7 @@ export const MainHeader = () => {
 	return (
 		<>
 			<Box
+				zIndex={100}
 				position="fixed"
 				left={isLeftBarOpen ? '350px' : 0}
 				display="flex"
@@ -28,7 +29,11 @@ export const MainHeader = () => {
 				width={isLeftBarOpen ? 'calc(100% - 350px)' : '100%'}
 				height="60px"
 				padding="0 20px"
-				bgcolor={palette.layout.mainLayout.header.bg}
+				bgcolor={
+					selectedContent === 'call'
+						? palette.content.call.bg
+						: palette.layout.mainLayout.header.bg
+				}
 			>
 				{['xs', 'sm'].includes(breakpoint) ? (
 					<>

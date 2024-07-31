@@ -41,7 +41,7 @@ export interface ContextProviderProps {
 	>;
 }
 
-export type SelectedContentProps = 'noSelected' | 'character' | 'log';
+export type SelectedContentProps = 'noSelected' | 'character' | 'log' | 'call';
 
 export interface characterStyleProps {
 	name: string;
