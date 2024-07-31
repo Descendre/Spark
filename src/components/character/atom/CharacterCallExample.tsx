@@ -19,7 +19,7 @@ export const CharacterCallExample = ({ text }: CharacterCallExampleProps) => {
 				height: '150px',
 				cursor: 'pointer',
 				backgroundColor: 'transparent',
-				borderColor: palette.success.dark,
+				borderColor: palette.success.main,
 			}}
 		>
 			<CardHeader

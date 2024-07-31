@@ -1,5 +1,5 @@
 'use client';
-import { Call, Log, NoSelected } from '@/contents';
+import { Call, Character, Log, NoSelected } from '@/contents';
 import { useLayout, usePalette } from '@/hooks';
 import { Box } from '@mui/material';
 
@@ -17,6 +17,8 @@ export const ChatView = () => {
 		>
 			{selectedContent === 'log' ? (
 				<Log />
+			) : selectedContent === 'character' ? (
+				<Character />
 			) : selectedContent === 'call' ? (
 				<Call />
 			) : (

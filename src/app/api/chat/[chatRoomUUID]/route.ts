@@ -7,13 +7,21 @@ export const GET = async (
 ): Promise<NextResponse> => {
 	try {
 		const chatRoomUUID = params.chatRoomUUID;
+
+		const chatRoom = await prisma.chatRoom.findUnique({
+			where: { id: chatRoomUUID },
+		});
+		if (!chatRoom) {
+			return NextResponse.json(404);
+		}
+
 		const chats = await prisma.chat.findMany({
 			where: { chatRoomId: chatRoomUUID },
 			orderBy: { createdAt: 'asc' },
 		});
 		return NextResponse.json(chats);
 	} catch (error) {
-		console.error('Error creating Chat:', error);
+		console.error('Error getting Chat:', error);
 		return NextResponse.json(error);
 	}
 };

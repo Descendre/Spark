@@ -1,5 +1,5 @@
 'use client';
-import { CallDisplay, CommonStyleHeader } from '@/components';
+import { CallDisplay, CallFooter, CommonStyleHeader } from '@/components';
 import { useCharacter, useChat, usePalette } from '@/hooks';
 import { Box } from '@mui/material';
 import React from 'react';
@@ -25,6 +25,7 @@ export const Call = () => {
 					url={characterDetails[speakerUuid || '']?.style_infos[0].icon}
 				/>
 			</Box>
+			<CallFooter />
 		</>
 	);
 };

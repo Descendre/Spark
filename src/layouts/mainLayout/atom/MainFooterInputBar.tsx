@@ -7,7 +7,7 @@ import { useParams } from 'next/navigation';
 
 export const MainFooterInputBar = () => {
 	const palette = usePalette();
-	const { chatRoomUUID } = useParams();
+	const { chatRoomUUID } = useParams() as { chatRoomUUID: string };
 	const { selectedContent, selectedItem } = useLayout();
 	const { handleGetSpeakerUuidBySelectedItem } = useChat();
 	const { text, handleSetText, handleKeyDown, handeSendText, isSending } =
@@ -16,7 +16,7 @@ export const MainFooterInputBar = () => {
 	const disabled: boolean =
 		!['character', 'log'].includes(selectedContent) ||
 		isSending ||
-		(typeof chatRoomUUID === 'string' && !(chatRoomUUID in text));
+		!(chatRoomUUID in text);
 	const currentCharacter = findCharacterByUUID({
 		array: characters,
 		uuid: selectedItem || '',
