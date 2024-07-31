@@ -1,5 +1,5 @@
 'use client';
-import { Log, NoSelected } from '@/contents';
+import { Call, Log, NoSelected } from '@/contents';
 import { useLayout, usePalette } from '@/hooks';
 import { Box } from '@mui/material';
 
@@ -15,7 +15,13 @@ export const ChatView = () => {
 			height="100%"
 			bgcolor={palette.background.default}
 		>
-			{selectedContent === 'log' ? <Log /> : <NoSelected />}
+			{selectedContent === 'log' ? (
+				<Log />
+			) : selectedContent === 'call' ? (
+				<Call />
+			) : (
+				<NoSelected />
+			)}
 		</Box>
 	);
 };

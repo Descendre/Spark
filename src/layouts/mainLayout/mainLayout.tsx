@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import { useBreakPoint, useLayout } from '@/hooks';
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
-	const { isLeftBar } = useLayout();
+	const { isLeftBar, selectedContent } = useLayout();
 	const breakpoint = useBreakPoint();
 	const isLeftBarOpen: boolean =
 		!['xs', 'sm'].includes(breakpoint) && isLeftBar;
@@ -29,10 +29,10 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 					<Box
 						zIndex={50}
 						width={isLeftBarOpen ? 'calc(100% - 350px)' : '100%'}
-						height="calc(100% - 100px)"
+						height={selectedContent !== 'call' ? 'calc(100% - 100px)' : '100%'}
 					>
 						{children}
-						<MainFooter />
+						{selectedContent !== 'call' && <MainFooter />}
 					</Box>
 				</Box>
 			</Box>

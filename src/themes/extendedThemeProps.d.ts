@@ -6,8 +6,6 @@ declare module '@mui/material/styles' {
 			mainLayout: {
 				header: {
 					bg: string;
-					callStart: string;
-					callEnd: string;
 					disabled: string;
 				};
 				leftBar: {
@@ -38,6 +36,9 @@ declare module '@mui/material/styles' {
 				userChatBox: {
 					bg: string;
 				};
+			};
+			call: {
+				bg: string;
 			};
 		};
 	}
@@ -46,8 +47,6 @@ declare module '@mui/material/styles' {
 			mainLayout: {
 				header: {
 					bg: string;
-					callStart: string;
-					callEnd: string;
 					disabled: string;
 				};
 				leftBar: {
@@ -78,6 +77,9 @@ declare module '@mui/material/styles' {
 				userChatBox: {
 					bg: string;
 				};
+			};
+			call: {
+				bg: string;
 			};
 		};
 	}

@@ -1,14 +1,16 @@
 'use client';
-import { usePalette } from '@/hooks';
+import { useCall, usePalette } from '@/hooks';
 import { CharacterCallExampleProps } from '@/interfaces';
 import { Call } from '@mui/icons-material';
 import { Card, CardContent, CardHeader, Typography } from '@mui/material';
 
 export const CharacterCallExample = ({ text }: CharacterCallExampleProps) => {
 	const palette = usePalette();
+	const { handleNewCallStart } = useCall();
 
 	return (
 		<Card
+			onClick={() => handleNewCallStart()}
 			variant="outlined"
 			sx={{
 				width: '200px',

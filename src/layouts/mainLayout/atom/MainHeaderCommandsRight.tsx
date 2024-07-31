@@ -1,12 +1,15 @@
 'use client';
-import { useLayout, usePalette } from '@/hooks';
-import { Call } from '@mui/icons-material';
-import { Box, IconButton, Tooltip } from '@mui/material';
+import { useCall, useLayout, usePalette } from '@/hooks';
+import { Call, CallEnd } from '@mui/icons-material';
+import { Box, Tooltip } from '@mui/material';
 
 export const MainHeaderCommandsRight = () => {
-	const { selectedContent } = useLayout();
+	const { selectedContent, setSelectedContent } = useLayout();
+	const { handleCallEnd } = useCall();
 	const palette = usePalette();
-	const iconDisabled: boolean = selectedContent !== 'character';
+	const iconDisabled: boolean = !['character', 'log', 'call'].includes(
+		selectedContent
+	);
 
 	return (
 		<Box
@@ -16,32 +19,45 @@ export const MainHeaderCommandsRight = () => {
 			gap="10px"
 			height="100%"
 		>
-			<Tooltip title="通話を開始" placement="bottom">
-				<span>
-					<IconButton
-						disableRipple
-						disabled={iconDisabled}
-						sx={{
-							backgroundColor: palette.layout.mainLayout.header.callStart,
-							'&:hover': {
-								backgroundColor: palette.layout.mainLayout.header.callStart,
-							},
-							'&.Mui-disabled': {
-								backgroundColor: palette.layout.mainLayout.header.disabled,
-							},
-						}}
-					>
-						<Call
+			{selectedContent === 'call' ? (
+				<Tooltip title="通話を終了" placement="bottom">
+					<span>
+						<CallEnd
+							onClick={() => {
+								if (!iconDisabled) {
+									handleCallEnd();
+								}
+							}}
 							sx={{
-								cursor: 'pointer',
+								userSelect: iconDisabled ? 'none' : 'auto',
+								cursor: iconDisabled ? 'auto' : 'pointer',
 								color: iconDisabled
 									? palette.text.disabled
 									: palette.text.primary,
 							}}
 						/>
-					</IconButton>
-				</span>
-			</Tooltip>
+					</span>
+				</Tooltip>
+			) : (
+				<Tooltip title="通話を開始" placement="bottom">
+					<span>
+						<Call
+							onClick={() => {
+								if (!iconDisabled) {
+									setSelectedContent('call');
+								}
+							}}
+							sx={{
+								userSelect: iconDisabled ? 'none' : 'none',
+								cursor: iconDisabled ? 'auto' : 'pointer',
+								color: iconDisabled
+									? palette.text.disabled
+									: palette.text.primary,
+							}}
+						/>
+					</span>
+				</Tooltip>
+			)}
 		</Box>
 	);
 };
