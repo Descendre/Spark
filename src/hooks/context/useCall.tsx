@@ -17,29 +17,15 @@ export const useCall = (): UseCallProps => {
 		browserSupportsSpeechRecognition,
 	} = useSpeechRecognition();
 	const router = useRouter();
-	const {
-		handleCreateChatRoom,
-		handleGetChatRooms,
-		handleSendText,
-		handleSetChat,
-		handleAddUserChat,
-		handleGetChats,
-		handleAddAIChat,
-		handlePlayVoice,
-	} = useChat();
+	const { handleCreateChatRoom, handleGetChatRooms, handleSendText } =
+		useChat();
 
 	const context = useContext(Context);
 	if (!context) {
 		throw new Error('Context is not provided');
 	}
 
-	const {
-		selectedItem,
-		setSelectedContent,
-		setIsLogSelect,
-		style,
-		setIsSending,
-	} = context;
+	const { selectedItem, setSelectedContent, setIsLogSelect } = context;
 
 	useEffect(() => {
 		SpeechRecognition.stopListening();
@@ -56,7 +42,7 @@ export const useCall = (): UseCallProps => {
 		setSelectedContent('call');
 		setIsLogSelect(true);
 		setTimeout(() => {
-			SpeechRecognition.startListening({ continuous: true });
+			SpeechRecognition.startListening({ continuous: true, language: 'ja-JP' });
 		}, 2000);
 	};
 
@@ -64,7 +50,7 @@ export const useCall = (): UseCallProps => {
 		if (!browserSupportsSpeechRecognition) return;
 		setSelectedContent('call');
 		setIsLogSelect(true);
-		SpeechRecognition.startListening({ continuous: true });
+		SpeechRecognition.startListening({ continuous: true, language: 'ja-JP' });
 	};
 
 	const handleCallEnd = (): void => {
@@ -73,7 +59,7 @@ export const useCall = (): UseCallProps => {
 	};
 
 	const handleCallPlay = (): void => {
-		SpeechRecognition.startListening({ continuous: true });
+		SpeechRecognition.startListening({ continuous: true, language: 'ja-JP' });
 	};
 
 	const handleCallPause = (): void => {
@@ -85,7 +71,12 @@ export const useCall = (): UseCallProps => {
 		chatRoomId,
 	}: HandleTranscriptSendProps): Promise<void> => {
 		if (transcript.length === 0 || !chatRoomId) return;
-		handleSendText({ uuid: uuid, content: transcript, chatRoomId: chatRoomId });
+		await handleSendText({
+			uuid: uuid,
+			content: transcript,
+			chatRoomId: chatRoomId,
+		});
+		resetTranscript();
 	};
 
 	return {
