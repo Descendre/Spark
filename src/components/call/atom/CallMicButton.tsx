@@ -1,18 +1,18 @@
 'use client';
-import { useCall, usePalette } from '@/hooks';
+import { useCall, useChat, usePalette } from '@/hooks';
 import { Mic, MicOff } from '@mui/icons-material';
 import { Avatar, Tooltip } from '@mui/material';
 
 export const CallMicButton = () => {
-	const { listening, handleCallPlay, handleCallPause } = useCall();
+	const { isSending } = useChat();
+	const { listening, handleCallPlay } = useCall();
 	const palette = usePalette();
 
 	return (
 		<>
-			{listening ? (
-				<Tooltip title="マイクをオフ" placement="top">
+			{listening && !isSending ? (
+				<Tooltip title="マイク起動中" placement="top">
 					<Avatar
-						onClick={() => handleCallPause()}
 						sx={{
 							backgroundColor: palette.action.disabled,
 							width: '60px',
@@ -30,7 +30,11 @@ export const CallMicButton = () => {
 			) : (
 				<Tooltip title="マイクをオン" placement="top">
 					<Avatar
-						onClick={() => handleCallPlay()}
+						onClick={async () => {
+							if (!isSending) {
+								await handleCallPlay();
+							}
+						}}
 						sx={{
 							backgroundColor: palette.action.disabled,
 							width: '60px',

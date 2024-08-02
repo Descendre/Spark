@@ -1,10 +1,11 @@
 export interface UseCallProps {
 	listening: boolean;
+	transcript: string;
 	handleNewCallStart: () => Promise<void>;
-	handleCallStart: () => void;
-	handleCallEnd: () => void;
-	handleCallPlay: () => void;
-	handleCallPause: () => void;
+	handleCallStart: () => Promise<void>;
+	handleCallEnd: () => Promise<void>;
+	handleCallPlay: () => Promise<void>;
+	handleCallPause: () => Promise<void>;
 	handleTranscriptSend: ({
 		uuid,
 		chatRoomId,

@@ -1,5 +1,10 @@
 'use client';
-import { CallDisplay, CallFooter, CommonStyleHeader } from '@/components';
+import {
+	CallDisplay,
+	CallFooter,
+	CallTranscript,
+	CommonStyleHeader,
+} from '@/components';
 import { useCharacter, useChat, usePalette } from '@/hooks';
 import { Box } from '@mui/material';
 import React from 'react';
@@ -26,6 +31,8 @@ export const Call = () => {
 				/>
 			</Box>
 			<CallFooter />
+
+			<CallTranscript />
 		</>
 	);
 };
