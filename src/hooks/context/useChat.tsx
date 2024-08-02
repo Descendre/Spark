@@ -19,8 +19,11 @@ import {
 } from '@/interfaces';
 import { axiosFetch } from '@/libs';
 import { Context } from '@/provider';
+import { findCharacterByUUID, generateMessages } from '@/utils';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
+import 'regenerator-runtime';
+import SpeechRecognition from 'react-speech-recognition';
 
 export const useChat = (): UseChatProps => {
 	const router = useRouter();
@@ -43,6 +46,7 @@ export const useChat = (): UseChatProps => {
 		setChat,
 		setIsLogSelect,
 		setSelectedContent,
+		characters,
 	} = context;
 
 	const handleGetChatRooms = async (): Promise<void> => {
@@ -176,6 +180,7 @@ export const useChat = (): UseChatProps => {
 		const audio = new Audio(synthesisResponse);
 		audio.addEventListener('ended', () => {
 			setIsSending(false);
+			SpeechRecognition.startListening({ language: 'ja-JP' });
 		});
 		await audio.play();
 
@@ -202,7 +207,12 @@ export const useChat = (): UseChatProps => {
 		content,
 		chatRoomId,
 	}: HandleSendTextProps): Promise<void> => {
+		const currentCharacter = findCharacterByUUID({
+			array: characters,
+			uuid: uuid || '',
+		});
 		if (
+			!currentCharacter ||
 			isSending ||
 			!uuid ||
 			(selectedContent === 'character' && text[uuid].length === 0)
@@ -225,17 +235,15 @@ export const useChat = (): UseChatProps => {
 			router.push(`/c/${response.id}`);
 			await handleGetChats({ chatRoomId: response.id });
 
-			const messages = [
-				{
-					role: 'user',
-					content: content,
-				},
-			];
+			const messages = generateMessages({
+				content: content,
+				character: currentCharacter.name,
+			});
+
 			const chatGPTResponse = await handleChatGPT({
 				model: 'gpt-4o-mini',
 				messages: messages,
 			});
-			console.log(chatGPTResponse);
 
 			await handleAddAIChat({
 				content: chatGPTResponse.choices[0].message.content,
@@ -254,12 +262,11 @@ export const useChat = (): UseChatProps => {
 			await handleAddUserChat({ content: content, chatRoomId: chatRoomId });
 			await handleGetChats({ chatRoomId: chatRoomId });
 
-			const messages = [
-				{
-					role: 'user',
-					content: content,
-				},
-			];
+			const messages = generateMessages({
+				content: content,
+				character: currentCharacter.name,
+			});
+
 			const chatGPTResponse = await handleChatGPT({
 				model: 'gpt-4o-mini',
 				messages: messages,

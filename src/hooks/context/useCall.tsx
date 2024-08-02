@@ -10,12 +10,8 @@ import SpeechRecognition, {
 } from 'react-speech-recognition';
 
 export const useCall = (): UseCallProps => {
-	const {
-		transcript,
-		listening,
-		resetTranscript,
-		browserSupportsSpeechRecognition,
-	} = useSpeechRecognition();
+	const { transcript, listening, browserSupportsSpeechRecognition } =
+		useSpeechRecognition();
 	const router = useRouter();
 	const { handleCreateChatRoom, handleGetChatRooms, handleSendText } =
 		useChat();
@@ -41,29 +37,29 @@ export const useCall = (): UseCallProps => {
 		router.push(`/c/${response.id}?callStart=true`);
 		setSelectedContent('call');
 		setIsLogSelect(true);
-		setTimeout(() => {
-			SpeechRecognition.startListening({ continuous: true, language: 'ja-JP' });
-		}, 2000);
+		setTimeout(async () => {
+			await SpeechRecognition.startListening({ language: 'ja-JP' });
+		}, 1000);
 	};
 
-	const handleCallStart = (): void => {
+	const handleCallStart = async (): Promise<void> => {
 		if (!browserSupportsSpeechRecognition) return;
 		setSelectedContent('call');
 		setIsLogSelect(true);
-		SpeechRecognition.startListening({ continuous: true, language: 'ja-JP' });
+		await SpeechRecognition.startListening({ language: 'ja-JP' });
 	};
 
-	const handleCallEnd = (): void => {
+	const handleCallEnd = async (): Promise<void> => {
 		setSelectedContent('log');
-		SpeechRecognition.stopListening();
+		await SpeechRecognition.stopListening();
 	};
 
-	const handleCallPlay = (): void => {
-		SpeechRecognition.startListening({ continuous: true, language: 'ja-JP' });
+	const handleCallPlay = async (): Promise<void> => {
+		await SpeechRecognition.startListening({ language: 'ja-JP' });
 	};
 
-	const handleCallPause = (): void => {
-		SpeechRecognition.stopListening();
+	const handleCallPause = async (): Promise<void> => {
+		await SpeechRecognition.stopListening();
 	};
 
 	const handleTranscriptSend = async ({
@@ -76,11 +72,18 @@ export const useCall = (): UseCallProps => {
 			content: transcript,
 			chatRoomId: chatRoomId,
 		});
-		resetTranscript();
 	};
+
+	const recognition = SpeechRecognition.getRecognition();
+	if (recognition) {
+		recognition.onend = async () => {
+			await handleCallPause();
+		};
+	}
 
 	return {
 		listening,
+		transcript,
 		handleNewCallStart,
 		handleCallStart,
 		handleCallEnd,

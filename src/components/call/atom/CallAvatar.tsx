@@ -1,10 +1,11 @@
 'use client';
-import { usePalette } from '@/hooks';
+import { useCall, usePalette } from '@/hooks';
 import { CallAvatarProps } from '@/interfaces';
 import { Avatar, Box } from '@mui/material';
 
 export const CallAvatar = ({ url }: CallAvatarProps) => {
 	const palette = usePalette();
+	const { listening } = useCall();
 
 	return (
 		<Box
@@ -19,7 +20,8 @@ export const CallAvatar = ({ url }: CallAvatarProps) => {
 				sx={{
 					width: '100%',
 					height: '100%',
-					border: `solid 5px ${palette.primary.main}`,
+					border: listening ? `solid 5px ${palette.primary.main}` : 'none',
+					boxSizing: 'border-box',
 				}}
 			/>
 		</Box>

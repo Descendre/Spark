@@ -11,18 +11,20 @@ export const CallSendButton = () => {
 	const speakerUuid: string | undefined = handleGetSpeakerUuidBySelectedItem();
 
 	return (
-		<Tooltip title="送信" placement="top">
+		<Tooltip title={isSending ? 'AI処理中...' : '送信'} placement="top">
 			<Avatar
-				onClick={() => {
+				onClick={async () => {
 					if (speakerUuid && selectedItem && !isSending) {
-						handleTranscriptSend({
+						await handleTranscriptSend({
 							uuid: speakerUuid,
 							chatRoomId: selectedItem,
 						});
 					}
 				}}
 				sx={{
-					backgroundColor: palette.action.disabled,
+					backgroundColor: isSending
+						? palette.action.disabledBackground
+						: palette.action.disabled,
 					width: '60px',
 					height: '60px',
 					cursor: 'pointer',
@@ -31,7 +33,7 @@ export const CallSendButton = () => {
 				{isSending ? (
 					<HourglassTop
 						sx={{
-							color: palette.text.primary,
+							color: palette.text.secondary,
 						}}
 					/>
 				) : (
