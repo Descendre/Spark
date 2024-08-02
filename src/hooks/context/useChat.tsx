@@ -213,18 +213,13 @@ export const useChat = (): UseChatProps => {
 			array: characters,
 			uuid: uuid || '',
 		});
-		if (
-			!currentCharacter ||
-			isSending ||
-			!uuid ||
-			(selectedContent === 'character' && text[uuid].length === 0)
-		)
-			return;
+		if (!currentCharacter || isSending || !uuid) return;
 		setIsSending(true);
 		setText((prevText) => ({
 			...prevText,
 			[uuid]: '',
 		}));
+		content = content.trim();
 
 		const messages = generateMessages({
 			content: content,

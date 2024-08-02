@@ -1,4 +1,5 @@
 'use client';
+import { useChat, useLayout } from '@/hooks';
 import { CharacterTextExampleProps } from '@/interfaces';
 import { Card, CardContent, CardHeader, Typography } from '@mui/material';
 
@@ -6,8 +7,20 @@ export const CharacterTextExample = ({
 	icon,
 	text,
 }: CharacterTextExampleProps) => {
+	const { selectedItem } = useLayout();
+	const { handleSendText } = useChat();
+
 	return (
 		<Card
+			onClick={async () => {
+				if (selectedItem) {
+					await handleSendText({
+						uuid: selectedItem,
+						content: text,
+						chatRoomId: undefined,
+					});
+				}
+			}}
 			variant="outlined"
 			sx={{
 				width: '200px',
