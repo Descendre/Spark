@@ -8,6 +8,7 @@ import 'regenerator-runtime';
 import SpeechRecognition, {
 	useSpeechRecognition,
 } from 'react-speech-recognition';
+import { findCharacterByUUID } from '@/utils';
 
 export const useCall = (): UseCallProps => {
 	const { transcript, listening, browserSupportsSpeechRecognition } =
@@ -21,16 +22,22 @@ export const useCall = (): UseCallProps => {
 		throw new Error('Context is not provided');
 	}
 
-	const { selectedItem, setSelectedContent, setIsLogSelect } = context;
+	const { selectedItem, setSelectedContent, setIsLogSelect, characters } =
+		context;
 
 	useEffect(() => {
 		SpeechRecognition.stopListening();
 	}, [selectedItem]);
 
 	const handleNewCallStart = async (): Promise<void> => {
-		if (!selectedItem || !browserSupportsSpeechRecognition) return;
+		const currentCharacter = findCharacterByUUID({
+			array: characters,
+			uuid: selectedItem,
+		});
+		if (!selectedItem || !browserSupportsSpeechRecognition || !currentCharacter)
+			return;
 		const response = await handleCreateChatRoom({
-			roomName: 'test room name',
+			roomName: `${currentCharacter.name}との通話ルーム`,
 			speakerUuid: selectedItem,
 		});
 		await handleGetChatRooms();

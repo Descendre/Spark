@@ -180,7 +180,9 @@ export const useChat = (): UseChatProps => {
 		const audio = new Audio(synthesisResponse);
 		audio.addEventListener('ended', () => {
 			setIsSending(false);
-			SpeechRecognition.startListening({ language: 'ja-JP' });
+			if (selectedContent === 'call') {
+				SpeechRecognition.startListening({ language: 'ja-JP' });
+			}
 		});
 		await audio.play();
 
@@ -224,9 +226,18 @@ export const useChat = (): UseChatProps => {
 			[uuid]: '',
 		}));
 
+		const messages = generateMessages({
+			content: content,
+			character: currentCharacter.name,
+		});
+		const chatGPTResponse = await handleChatGPT({
+			model: 'gpt-4o-mini',
+			messages: messages,
+		});
+
 		if (selectedContent === 'character') {
 			const response = await handleCreateChatRoom({
-				roomName: 'test room name',
+				roomName: chatGPTResponse.choices[0].message.content.substring(0, 30),
 				speakerUuid: uuid,
 			});
 			await handleGetChatRooms();
@@ -234,16 +245,6 @@ export const useChat = (): UseChatProps => {
 			await handleAddUserChat({ content: content, chatRoomId: response.id });
 			router.push(`/c/${response.id}`);
 			await handleGetChats({ chatRoomId: response.id });
-
-			const messages = generateMessages({
-				content: content,
-				character: currentCharacter.name,
-			});
-
-			const chatGPTResponse = await handleChatGPT({
-				model: 'gpt-4o-mini',
-				messages: messages,
-			});
 
 			await handleAddAIChat({
 				content: chatGPTResponse.choices[0].message.content,
@@ -261,16 +262,6 @@ export const useChat = (): UseChatProps => {
 			handleSetChat({ chatRoomId: chatRoomId, content: content });
 			await handleAddUserChat({ content: content, chatRoomId: chatRoomId });
 			await handleGetChats({ chatRoomId: chatRoomId });
-
-			const messages = generateMessages({
-				content: content,
-				character: currentCharacter.name,
-			});
-
-			const chatGPTResponse = await handleChatGPT({
-				model: 'gpt-4o-mini',
-				messages: messages,
-			});
 
 			await handleAddAIChat({
 				content: chatGPTResponse.choices[0].message.content,
