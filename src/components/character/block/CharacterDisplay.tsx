@@ -46,26 +46,14 @@ export const CharacterDisplay = () => {
 				<CharacterCallExample
 					text={`${currentCharacter?.name}と通話を開始する`}
 				/>
+				<CharacterTextExample icon={<Settings />} text="HAL名古屋とは？" />
+				<CharacterTextExample icon={<Settings />} text="French Coreとは？" />
 				<CharacterTextExample
 					icon={<Settings />}
-					text="あああああああああああ"
+					text="この夏ぴったりのスタミナ食について教えてください"
 				/>
-				<CharacterTextExample
-					icon={<Settings />}
-					text="あああああああああああ"
-				/>
-				<CharacterTextExample
-					icon={<Settings />}
-					text="あああああああああああ"
-				/>
-				<CharacterTextExample
-					icon={<Settings />}
-					text="あああああああああああ"
-				/>
-				<CharacterTextExample
-					icon={<Settings />}
-					text="あああああああああああ"
-				/>
+				<CharacterTextExample icon={<Settings />} text="眠れないなぁ。。。" />
+				<CharacterTextExample icon={<Settings />} text="こんにちは！" />
 			</Box>
 		</Box>
 	);
