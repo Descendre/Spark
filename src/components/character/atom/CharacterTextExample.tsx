@@ -1,5 +1,5 @@
 'use client';
-import { useChat, useLayout } from '@/hooks';
+import { useChat, useLayout, usePalette } from '@/hooks';
 import { CharacterTextExampleProps } from '@/interfaces';
 import { Card, CardContent, CardHeader, Typography } from '@mui/material';
 
@@ -7,13 +7,14 @@ export const CharacterTextExample = ({
 	icon,
 	text,
 }: CharacterTextExampleProps) => {
+	const palette = usePalette();
 	const { selectedItem } = useLayout();
-	const { handleSendText } = useChat();
+	const { handleSendText, isSending } = useChat();
 
 	return (
 		<Card
 			onClick={async () => {
-				if (selectedItem) {
+				if (selectedItem && !isSending) {
 					await handleSendText({
 						uuid: selectedItem,
 						content: text,
@@ -29,6 +30,12 @@ export const CharacterTextExample = ({
 				height: '150px',
 				cursor: 'pointer',
 				backgroundColor: 'transparent',
+				borderColor: isSending
+					? palette.action.disabledBackground
+					: palette.action.disabled,
+				color: isSending
+					? palette.action.disabledBackground
+					: palette.text.primary,
 			}}
 		>
 			<CardHeader

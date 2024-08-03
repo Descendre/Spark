@@ -1,11 +1,12 @@
 'use client';
-import { useCall, usePalette } from '@/hooks';
+import { useCall, useChat, usePalette } from '@/hooks';
 import { CharacterCallExampleProps } from '@/interfaces';
 import { Call } from '@mui/icons-material';
 import { Card, CardContent, CardHeader, Typography } from '@mui/material';
 
 export const CharacterCallExample = ({ text }: CharacterCallExampleProps) => {
 	const palette = usePalette();
+	const { isSending } = useChat();
 	const { handleNewCallStart } = useCall();
 
 	return (
@@ -19,11 +20,25 @@ export const CharacterCallExample = ({ text }: CharacterCallExampleProps) => {
 				height: '150px',
 				cursor: 'pointer',
 				backgroundColor: 'transparent',
-				borderColor: palette.success.main,
+				borderColor: isSending
+					? palette.action.disabledBackground
+					: palette.success.main,
+				color: isSending
+					? palette.action.disabledBackground
+					: palette.text.primary,
 			}}
 		>
 			<CardHeader
-				avatar={<Call color="success" />}
+				avatar={
+					<Call
+						color="success"
+						sx={{
+							color: isSending
+								? palette.action.disabledBackground
+								: palette.success.main,
+						}}
+					/>
+				}
 				sx={{
 					height: '50px',
 				}}
@@ -35,7 +50,9 @@ export const CharacterCallExample = ({ text }: CharacterCallExampleProps) => {
 			>
 				<Typography
 					variant="body1"
-					color={palette.success.main}
+					color={
+						isSending ? palette.action.disabledBackground : palette.success.main
+					}
 					sx={{
 						wordBreak: 'break-all',
 						overflow: 'hidden',

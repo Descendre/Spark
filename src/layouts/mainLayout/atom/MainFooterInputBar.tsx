@@ -17,10 +17,6 @@ export const MainFooterInputBar = () => {
 		selectedContent === 'noSelected' ||
 		isSending ||
 		(chatRoomUUID ? !(chatRoomUUID in text) : false);
-	const currentCharacter = findCharacterByUUID({
-		array: characters,
-		uuid: selectedItem || '',
-	});
 	const speakerUuid: string | undefined = handleGetSpeakerUuidBySelectedItem();
 	const uuid =
 		selectedContent === 'character'
@@ -28,6 +24,10 @@ export const MainFooterInputBar = () => {
 			: selectedContent === 'log'
 				? speakerUuid
 				: undefined;
+	const currentCharacter = findCharacterByUUID({
+		array: characters,
+		uuid: uuid || '',
+	});
 
 	return (
 		<>
