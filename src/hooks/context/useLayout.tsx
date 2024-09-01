@@ -28,6 +28,8 @@ export const useLayout = (): UseLayoutProps => {
 		setIsLeftDrawer,
 		isLogSelect,
 		setIsLogSelect,
+		isCustomModal,
+		setIsCustomModal,
 	} = context;
 
 	const handleCharacterSelect = ({
@@ -73,5 +75,7 @@ export const useLayout = (): UseLayoutProps => {
 		setIsLogSelect,
 		handleCharacterSelect,
 		handleLogSelect,
+		isCustomModal,
+		setIsCustomModal,
 	};
 };

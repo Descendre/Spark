@@ -1,6 +1,12 @@
 'use client';
 import { MainLayoutProps } from '@/interfaces';
-import { MainFooter, MainHeader, MainLeftBar, MainLeftDrawer } from './block';
+import {
+	MainCustomModal,
+	MainFooter,
+	MainHeader,
+	MainLeftBar,
+	MainLeftDrawer,
+} from './block';
 import { Box } from '@mui/material';
 import { useBreakPoint, useLayout } from '@/hooks';
 
@@ -38,6 +44,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 			</Box>
 
 			{['xs', 'sm'].includes(breakpoint) && <MainLeftDrawer />}
+			<MainCustomModal />
 		</>
 	);
 };

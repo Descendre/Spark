@@ -1,10 +1,10 @@
 'use client';
 import { useCall, useLayout, usePalette } from '@/hooks';
-import { Call, CallEnd } from '@mui/icons-material';
+import { Call, CallEnd, Settings } from '@mui/icons-material';
 import { Box, Tooltip } from '@mui/material';
 
 export const MainHeaderCommandsRight = () => {
-	const { selectedContent } = useLayout();
+	const { selectedContent, setIsCustomModal } = useLayout();
 	const { handleNewCallStart, handleCallStart, handleCallEnd } = useCall();
 	const palette = usePalette();
 	const iconDisabled: boolean = !['character', 'log', 'call'].includes(
@@ -16,9 +16,20 @@ export const MainHeaderCommandsRight = () => {
 			display="flex"
 			justifyContent="center"
 			alignItems="center"
-			gap="10px"
+			gap="15px"
 			height="100%"
 		>
+			<Tooltip placement="bottom" title="カスタマイズ">
+				<span>
+					<Settings
+						onClick={() => setIsCustomModal((prev) => !prev)}
+						sx={{
+							cursor: 'pointer',
+						}}
+					/>
+				</span>
+			</Tooltip>
+
 			{selectedContent === 'call' ? (
 				<Tooltip title="通話を終了" placement="bottom">
 					<span>

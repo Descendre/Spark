@@ -39,6 +39,8 @@ export interface ContextProviderProps {
 	setChat: React.Dispatch<
 		React.SetStateAction<{ [uuid: string]: ChatsResponse }>
 	>;
+	isCustomModal: boolean;
+	setIsCustomModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type SelectedContentProps = 'noSelected' | 'character' | 'log' | 'call';

@@ -17,6 +17,9 @@ declare module '@mui/material/styles' {
 				footer: {
 					inputBar: string;
 				};
+				customModal: {
+					bg: string;
+				};
 				line: {
 					main: string;
 					sub: string;
@@ -57,6 +60,9 @@ declare module '@mui/material/styles' {
 				};
 				footer: {
 					inputBar: string;
+				};
+				customModal: {
+					bg: string;
 				};
 				line: {
 					main: string;
