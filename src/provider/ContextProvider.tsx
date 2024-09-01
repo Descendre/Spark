@@ -32,6 +32,7 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 	);
 	const [isSending, setIsSending] = useState<boolean>(false);
 	const [chat, setChat] = useState<{ [uuid: string]: ChatsResponse }>({});
+	const [isCustomModal, setIsCustomModal] = useState<boolean>(false);
 
 	const contextValue = {
 		characters,
@@ -58,6 +59,8 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 		setIsSending,
 		chat,
 		setChat,
+		isCustomModal,
+		setIsCustomModal,
 	};
 
 	return <Context.Provider value={contextValue}>{children}</Context.Provider>;

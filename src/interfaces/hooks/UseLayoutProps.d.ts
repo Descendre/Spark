@@ -15,6 +15,8 @@ export interface UseLayoutProps {
 	setIsLogSelect: React.Dispatch<React.SetStateAction<boolean>>;
 	handleCharacterSelect: ({ uuid }: HandleCharacterSelectProps) => void;
 	handleLogSelect: ({ chatRoomId }: HandleLogSelectProps) => void;
+	isCustomModal: boolean;
+	setIsCustomModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface HandleCharacterSelectProps {

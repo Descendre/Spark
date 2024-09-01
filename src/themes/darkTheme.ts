@@ -24,6 +24,9 @@ export const darkTheme = createTheme({
 				footer: {
 					inputBar: '#161f28',
 				},
+				customModal: {
+					bg: '#0d1318',
+				},
 				line: {
 					main: '#525f6c',
 					sub: '#283848',
