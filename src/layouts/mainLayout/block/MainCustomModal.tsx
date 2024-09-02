@@ -1,6 +1,7 @@
 'use client';
 import { useBreakPoint, useLayout, usePalette } from '@/hooks';
 import { Grow, Modal, Paper } from '@mui/material';
+import { MainCustomModalBody, MainCustomModalHeader } from '../atom';
 
 export const MainCustomModal = () => {
 	const breakpoint = useBreakPoint();
@@ -28,10 +29,13 @@ export const MainCustomModal = () => {
 							: 'calc(100vh - 90px)',
 						maxHeight: '800px',
 						marginTop: ['xs', 'sm'].includes(breakpoint) ? '0px' : '60px',
-						borderRadius: ['xs', 'sm'].includes(breakpoint) ? '0px' : '0px',
+						borderRadius: ['xs', 'sm'].includes(breakpoint) ? '0px' : '10px',
 						overflow: 'hidden',
 					}}
-				></Paper>
+				>
+					<MainCustomModalHeader />
+					<MainCustomModalBody />
+				</Paper>
 			</Grow>
 		</Modal>
 	);
