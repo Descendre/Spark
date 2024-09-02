@@ -8,3 +8,6 @@ export * from './MainHeaderCommandsRight';
 export * from './MainLeftDrawerSelection';
 export * from './MainFooterCredit';
 export * from './MainLeftBarListItemLog';
+export * from './MainCustomModalHeader';
+export * from './MainCustomModalBody';
+export * from './MainCustomModalTextArea';
