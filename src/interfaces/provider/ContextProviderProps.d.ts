@@ -41,6 +41,10 @@ export interface ContextProviderProps {
 	>;
 	isCustomModal: boolean;
 	setIsCustomModal: React.Dispatch<React.SetStateAction<boolean>>;
+	customText: string | null;
+	setCustomText: React.Dispatch<React.SetStateAction<string | null>>;
+	isCustom: boolean;
+	setIsCustom: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type SelectedContentProps = 'noSelected' | 'character' | 'log' | 'call';

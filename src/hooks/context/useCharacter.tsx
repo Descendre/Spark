@@ -25,6 +25,10 @@ export const useCharacter = (): UseCharacterProps => {
 		setText,
 		style,
 		setStyle,
+		customText,
+		setCustomText,
+		isCustom,
+		setIsCustom,
 	} = context;
 
 	const handleGetCharacters = async (): Promise<void> => {
@@ -94,6 +98,10 @@ export const useCharacter = (): UseCharacterProps => {
 		}));
 	};
 
+	const handleSetCustomText = ({ text }: { text: string }): void => {
+		setCustomText(text);
+	};
+
 	return {
 		characters,
 		setCharacters,
@@ -103,5 +111,10 @@ export const useCharacter = (): UseCharacterProps => {
 		setStyle,
 		handleGetCharacters,
 		handleSetCharacterStyle,
+		customText,
+		setCustomText,
+		handleSetCustomText,
+		isCustom,
+		setIsCustom,
 	};
 };

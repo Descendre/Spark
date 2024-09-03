@@ -17,8 +17,13 @@ export interface UseCharacterProps {
 	setStyle: React.Dispatch<
 		React.SetStateAction<{ [uuid: string]: characterStyleProps }>
 	>;
+	customText: string | null;
+	setCustomText: React.Dispatch<React.SetStateAction<string | null>>;
+	isCustom: boolean;
+	setIsCustom: React.Dispatch<React.SetStateAction<boolean>>;
 	handleGetCharacters: () => Promise<void>;
 	handleSetCharacterStyle: ({ index }: HandleSetCharacterStyleProps) => void;
+	handleSetCustomText: ({ text: string }) => void;
 }
 
 export interface HandleGetCharacterDetailProps {

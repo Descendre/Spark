@@ -1,11 +1,12 @@
 'use client';
-import { useCall, useLayout, usePalette } from '@/hooks';
+import { useCall, useCharacter, useLayout, usePalette } from '@/hooks';
 import { Call, CallEnd, Settings } from '@mui/icons-material';
 import { Box, Tooltip } from '@mui/material';
 
 export const MainHeaderCommandsRight = () => {
 	const { selectedContent, setIsCustomModal } = useLayout();
 	const { handleNewCallStart, handleCallStart, handleCallEnd } = useCall();
+	const { isCustom } = useCharacter();
 	const palette = usePalette();
 	const iconDisabled: boolean = !['character', 'log', 'call'].includes(
 		selectedContent
@@ -25,6 +26,7 @@ export const MainHeaderCommandsRight = () => {
 						onClick={() => setIsCustomModal((prev) => !prev)}
 						sx={{
 							cursor: 'pointer',
+							color: isCustom ? palette.primary.main : palette.text.primary,
 						}}
 					/>
 				</span>
