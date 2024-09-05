@@ -47,6 +47,8 @@ export const useChat = (): UseChatProps => {
 		setIsLogSelect,
 		setSelectedContent,
 		characters,
+		isCustom,
+		customText,
 	} = context;
 
 	const handleGetChatRooms = async (): Promise<void> => {
@@ -224,6 +226,7 @@ export const useChat = (): UseChatProps => {
 		const messages = generateMessages({
 			content: content,
 			character: currentCharacter.name,
+			...(isCustom ? { custom: customText } : {}),
 		});
 		const chatGPTResponse = await handleChatGPT({
 			model: 'gpt-4o-mini',
